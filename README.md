@@ -1,2 +1,9 @@
-# archifiltre-statistics
-Module for archifiltre statistics
+# Archifiltre statistics
+
+## Run the app
+
+Use the following command:
+```
+yarn start
+```
+
