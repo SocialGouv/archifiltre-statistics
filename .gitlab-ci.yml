@@ -23,7 +23,7 @@ Build:
   artifacts:
     expire_in: 1 week
     paths:
-      - packages/api/dist
+      - dist
 
 Register image:
   needs:
@@ -32,7 +32,7 @@ Register image:
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
-      --file ./packages/api/Dockerfile
+      --file ./Dockerfile
       --shm-size 256M
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
