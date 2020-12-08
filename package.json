@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts",
     "build": "tsc",
+    "k8s": "yarn --silent --cwd .k8s",
     "lint": "echo toSetup",
     "test": "echo toSetup"
   },
