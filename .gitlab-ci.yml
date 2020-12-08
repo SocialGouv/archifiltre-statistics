@@ -1,0 +1,41 @@
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v20.0.0
+
+variables:
+  AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+
+Release:
+  variables:
+    SEMANTIC_RELEASE_PLUGINS: |
+      @semantic-release/changelog
+      @semantic-release/exec
+      @semantic-release/git
+
+Test:
+  retry: 2
+  variables:
+    ENVIRONMENT_TYPE: dev.local
+
+Build:
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - packages/api/dist
+
+Register image:
+  needs:
+    - job: Build
+      artifacts: true
+  variables:
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      --file ./packages/api/Dockerfile
+      --shm-size 256M
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+K8S Test:
+  rules:
+    - when: never

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "start": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts"
+    "start": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts",
+    "build": "tsc",
+    "lint": "echo toSetup",
+    "test": "echo toSetup"
   },
   "author": "Fabrique des ministère sociaux",
   "license": "Apache-2.0",

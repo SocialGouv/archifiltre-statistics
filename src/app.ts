@@ -9,6 +9,14 @@ app.get("/", (req, res) => {
   res.json({ version: packageJson.version });
 });
 
+app.get("/liveness", (req, res, next) => {
+  res.send("Alive");
+});
+
+app.get("/readyness", (req, res, next) => {
+  res.send("Ready");
+});
+
 app.get("/statistics", async (req, res) => {
   const matomoData = await getMatomoData();
   res.json(matomoData);
