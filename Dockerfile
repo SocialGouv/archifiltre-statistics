@@ -1,15 +1,15 @@
-FROM node:14.11.0-alpine
+FROM node:12-alpine
 
 WORKDIR /app
 
-COPY package.json yarn.lock /app/
+RUN chown node:node /app
 
-RUN yarn --production --frozen-lockfile --cache-folder /dev/shm/yarn
+COPY . .
 
-COPY ./dist /app/dist
+RUN yarn --frozen-lockfile
 
 USER node
 
 ENV NODE_ENV=production
 
-CMD ["yarn", "start:prod"]
+ENTRYPOINT ["yarn", "start"]

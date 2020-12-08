@@ -1,7 +1,6 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: api-env
-  namespace: archifiltre-statistics
+  name: app-env
 data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
