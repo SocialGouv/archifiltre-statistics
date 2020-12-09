@@ -6,7 +6,7 @@ RUN chown node:node /app
 
 COPY . .
 
-RUN yarn --frozen-lockfile
+RUN yarn --frozen-lockfile --production
 
 USER node
 
