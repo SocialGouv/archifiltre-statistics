@@ -9,14 +9,6 @@ app.get("/", (req, res) => {
   res.json({ version: packageJson.version });
 });
 
-app.get("/liveness", (req, res, next) => {
-  res.send("Alive");
-});
-
-app.get("/readyness", (req, res, next) => {
-  res.send("Ready");
-});
-
 app.get("/healthz", (req, res) => {
   res.send("OK");
 });
