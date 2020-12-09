@@ -22,8 +22,15 @@ app.get("/healthz", (req, res) => {
 });
 
 app.get("/statistics", async (req, res) => {
-  const matomoData = await getMatomoData();
-  res.json(matomoData);
+  try {
+    const matomoData = await getMatomoData();
+    res.json(matomoData);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+      raw: err.toString(),
+    });
+  }
 });
 
 app.listen(port, () => {
