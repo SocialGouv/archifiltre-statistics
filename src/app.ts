@@ -1,12 +1,16 @@
 import express from "express";
 import packageJson from "../package.json";
 import { getMatomoData } from "./matomo/matomo-service";
+import { port } from "./config";
 
 const app = express();
-const port = 3000;
 
 app.get("/", (req, res) => {
   res.json({ version: packageJson.version });
+});
+
+app.get("/healthz", (req, res) => {
+  res.send("OK");
 });
 
 app.get("/statistics", async (req, res) => {
@@ -14,4 +18,6 @@ app.get("/statistics", async (req, res) => {
   res.json(matomoData);
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});

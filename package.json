@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "dist/app.js",
   "scripts": {
-    "start": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts"
+    "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts",
+    "build": "tsc",
+    "start": "node dist/src/app.js",
+    "k8s": "yarn --silent --cwd .k8s",
+    "lint": "echo toSetup",
+    "test": "echo toSetup"
   },
   "author": "Fabrique des ministère sociaux",
   "license": "Apache-2.0",

@@ -1,0 +1,23 @@
+include:
+  - project: SocialGouv/gitlab-ci-yml
+    file: /autodevops.yml
+    ref: v17.3.1
+
+variables:
+  AUTO_DEVOPS_RELEASE_AUTO: "🔖"
+  AUTO_DEVOPS_PRODUCTION_AUTO: "🚀"
+
+Build:
+  extends: .autodevops_build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - dist/
+
+# NOTE(julienbouquillon): use custom register job
+# By default, kosko-charts use a "/app" for default docker images names
+# TODO: discuss
+Register image:
+  extends: .autodevops_register_image
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
