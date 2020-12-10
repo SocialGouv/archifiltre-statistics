@@ -1,6 +1,7 @@
-import { ArchifiltreCountStatistic } from "../api-types";
-import { GithubDataItem } from "./github-types";
 import { filter } from "lodash/fp";
+
+import type { ArchifiltreCountStatistic } from "../api-types";
+import type { GithubDataItem } from "./github-types";
 
 export const filterWikiItem = filter<GithubDataItem>({
   path: "/SocialGouv/archifiltre/wiki/Wiki-Archifiltre",

@@ -1,14 +1,15 @@
 import axios from "axios";
+
+import type { ArchifiltreCountStatistic } from "../api-types";
 import { githubApiKey, githubApiUrl } from "../config";
+import type { GithubDataItem } from "./github-types";
 import { convertGitHubDataToApiData, filterWikiItem } from "./github-utils";
-import { GithubDataItem } from "./github-types";
-import { ArchifiltreCountStatistic } from "../api-types";
 
 export const getGitHubData = async (): Promise<ArchifiltreCountStatistic[]> =>
   axios
     .get(`${githubApiUrl}/repos/SocialGouv/archifiltre/traffic/popular/paths`, {
       headers: {
-        Authorization: `token ${githubApiKey}`,
+        authorization: `token ${githubApiKey}`,
       },
     })
     .then(({ data }: { data: GithubDataItem[] }) => data)

@@ -3,9 +3,9 @@ import { flatten } from "lodash/fp";
 
 import packageJson from "../package.json";
 import { port } from "./config";
+import { getGitHubData } from "./github/github-service";
 import { getMatomoData } from "./matomo/matomo-service";
 import { getYoutubeData } from "./youtube/youtube-service";
-import { getGitHubData } from "./github/github-service";
 
 const app = express();
 
