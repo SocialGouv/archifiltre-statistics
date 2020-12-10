@@ -1,11 +1,12 @@
-import { compose, flatten, map, pick } from "lodash/fp";
+import { compose, flatten, map, mapKeys, pick } from "lodash/fp";
 
+import type { ArchifiltreCountStatistic } from "../api-types";
 import type { MatomoEventCategory } from "./matomo-types";
 
-interface CreateMatomoMethodParams {
+type CreateMatomoMethodParams = {
   method: string;
   label: string;
-}
+};
 
 const createMatomoMethod = ({ method, label }: CreateMatomoMethodParams) =>
   `method=${method}&idSite=9&date=2019-04-17,today&period=range&label=${label}`;
@@ -25,9 +26,20 @@ export const getBulkRequestParamsFromLabels = (
       {}
     );
 
+const keysMap: Record<string, string> = {
+  label: "label",
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  nb_events: "count",
+};
+
+const convertMatomoDataToApiData = mapKeys(
+  (key: string): string => keysMap[key]
+);
+
 export const sanitizeMatomoData: <T extends MatomoEventCategory>(
   matomoApiResponse: T[][]
-) => MatomoEventCategory[] = compose(
+) => ArchifiltreCountStatistic[] = compose(
+  map(convertMatomoDataToApiData),
   map(pick(["label", "nb_events"])),
   flatten
 );
