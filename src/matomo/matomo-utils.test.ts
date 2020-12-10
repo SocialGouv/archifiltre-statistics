@@ -39,12 +39,12 @@ describe("matomoUtils", () => {
 
       expect(sanitizeMatomoData(matomoData)).toEqual([
         {
-          count: 10,
           label: "label",
+          value: 10,
         },
         {
-          count: 20,
           label: "label2",
+          value: 20,
         },
       ]);
     });
