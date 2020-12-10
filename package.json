@@ -8,16 +8,18 @@
     "start": "node dist/src/app.js",
     "k8s": "yarn --silent --cwd .k8s",
     "lint": "eslint .",
-    "test": "echo toSetup"
+    "test": "jest"
   },
   "author": "Fabrique des ministère sociaux",
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^26.0.18",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "ts-jest": "^26.4.4"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-typescript": "^1.46.0",
