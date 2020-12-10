@@ -1,7 +1,8 @@
 import express from "express";
+
 import packageJson from "../package.json";
-import { getMatomoData } from "./matomo/matomo-service";
 import { port } from "./config";
+import { getMatomoData } from "./matomo/matomo-service";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.get("/healthz", (req, res) => {
   res.send("OK");
 });
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 app.get("/statistics", async (req, res) => {
   const matomoData = await getMatomoData();
   res.json(matomoData);
