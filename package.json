@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/src/app.js",
     "k8s": "yarn --silent --cwd .k8s",
-    "lint": "eslint .",
+    "lint": "eslint . -c .eslintrc",
     "test": "jest"
   },
   "author": "Fabrique des ministère sociaux",

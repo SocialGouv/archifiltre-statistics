@@ -1,3 +1,6 @@
 {
-  "extends": ["@socialgouv/eslint-config-typescript"]
+  "extends": ["@socialgouv/eslint-config-typescript"],
+  "rules": {
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+  }
 }

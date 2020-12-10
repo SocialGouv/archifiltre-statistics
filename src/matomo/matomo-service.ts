@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import type { ArchifiltreCountStatistic } from "../api-types";
 import { matomoToken, matomoUrl } from "../config";
 import type { MatomoEventCategory } from "./matomo-types";
 import {
@@ -32,5 +33,5 @@ const getBulkMatomoData = async (): Promise<MatomoEventCategory[][]> =>
     })
     .then(({ data }: { data: MatomoEventCategory[][] }) => data);
 
-export const getMatomoData = async (): Promise<MatomoEventCategory[]> =>
+export const getMatomoData = async (): Promise<ArchifiltreCountStatistic[]> =>
   getBulkMatomoData().then(sanitizeMatomoData);
