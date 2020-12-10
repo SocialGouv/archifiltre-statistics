@@ -6,3 +6,4 @@ data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
   YOUTUBE_API_URL: https://youtube.googleapis.com/youtube/v3/
   YOUTUBE_CHANNEL_ID: UClDwrT-Y1NY9WnEiXLMHp6w
+  GITHUB_API_URL: https://api.github.com
