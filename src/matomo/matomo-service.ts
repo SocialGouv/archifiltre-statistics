@@ -1,10 +1,11 @@
 import axios from "axios";
+
 import { matomoToken, matomoUrl } from "../config";
+import type { MatomoEventCategory } from "./matomo-types";
 import {
   getBulkRequestParamsFromLabels,
   sanitizeMatomoData,
 } from "./matomo-utils";
-import { MatomoEventCategory } from "./matomo-types";
 
 const labels = [
   "FileTreeDrop",
@@ -17,18 +18,19 @@ const labels = [
   "Audit report export",
 ];
 
-export const getMatomoData = (): Promise<MatomoEventCategory[]> =>
-  getBulkMatomoData().then(sanitizeMatomoData);
-
-const getBulkMatomoData = (): Promise<MatomoEventCategory[][]> =>
+const getBulkMatomoData = async (): Promise<MatomoEventCategory[][]> =>
   axios
     .get(matomoUrl, {
       params: {
-        token_auth: matomoToken,
-        module: "API",
-        method: "API.getBulkRequest",
         format: "JSON",
+        method: "API.getBulkRequest",
+        module: "API",
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        token_auth: matomoToken,
         ...getBulkRequestParamsFromLabels(labels),
       },
     })
-    .then(({ data }) => data);
+    .then(({ data }: { data: MatomoEventCategory[][] }) => data);
+
+export const getMatomoData = async (): Promise<MatomoEventCategory[]> =>
+  getBulkMatomoData().then(sanitizeMatomoData);

@@ -1,17 +1,22 @@
-import { flatten, map, pick, compose } from "lodash/fp";
-import { MatomoEventCategory } from "./matomo-types";
+import { compose, flatten, map, pick } from "lodash/fp";
 
-type CreateMatomoMethodParams = {
+import type { MatomoEventCategory } from "./matomo-types";
+
+interface CreateMatomoMethodParams {
   method: string;
   label: string;
-};
+}
 
 const createMatomoMethod = ({ method, label }: CreateMatomoMethodParams) =>
   `method=${method}&idSite=9&date=2019-04-17,today&period=range&label=${label}`;
 
-export const getBulkRequestParamsFromLabels = (labels: string[]) =>
+type RequestParams = Record<string, string>;
+
+export const getBulkRequestParamsFromLabels = (
+  labels: string[]
+): RequestParams =>
   labels
-    .map((label) => createMatomoMethod({ method: "Events.getCategory", label }))
+    .map((label) => createMatomoMethod({ label, method: "Events.getCategory" }))
     .reduce(
       (urlParams, urlParam, index) => ({
         ...urlParams,

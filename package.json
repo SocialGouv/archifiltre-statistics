@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/src/app.js",
     "k8s": "yarn --silent --cwd .k8s",
-    "lint": "echo toSetup",
+    "lint": "eslint .",
     "test": "echo toSetup"
   },
   "author": "Fabrique des ministère sociaux",
@@ -24,6 +24,7 @@
     "@types/express": "^4.17.9",
     "@types/lodash": "^4.14.165",
     "eslint": "^7.15.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.6",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.0",
