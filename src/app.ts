@@ -1,13 +1,20 @@
+import cors from "cors";
 import express from "express";
 import { flatten } from "lodash/fp";
 
 import packageJson from "../package.json";
-import { port } from "./config";
+import { corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
 import { getMatomoData } from "./matomo/matomo-service";
 import { getYoutubeData } from "./youtube/youtube-service";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: corsOrigins,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json({ version: packageJson.version });
