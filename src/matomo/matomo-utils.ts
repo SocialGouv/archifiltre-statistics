@@ -29,7 +29,7 @@ export const getBulkRequestParamsFromLabels = (
 const keysMap: Record<string, string> = {
   label: "label",
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  nb_events: "count",
+  nb_events: "value",
 };
 
 const convertMatomoDataToApiData = mapKeys(

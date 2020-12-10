@@ -1,8 +1,10 @@
 import express from "express";
+import { flatten } from "lodash/fp";
 
 import packageJson from "../package.json";
 import { port } from "./config";
 import { getMatomoData } from "./matomo/matomo-service";
+import { getYoutubeData } from "./youtube/youtube-service";
 
 const app = express();
 
@@ -14,10 +16,10 @@ app.get("/healthz", (req, res) => {
   res.send("OK");
 });
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
-app.get("/statistics", async (req, res) => {
-  const matomoData = await getMatomoData();
-  res.json(matomoData);
+app.get("/statistics", (req, res) => {
+  void Promise.all([getMatomoData(), getYoutubeData()])
+    .then(flatten)
+    .then((data) => res.json(data));
 });
 
 app.listen(port, () => {
