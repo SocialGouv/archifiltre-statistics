@@ -5,7 +5,8 @@ import { flatten } from "lodash/fp";
 import packageJson from "../package.json";
 import { corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
-import { getMatomoData } from "./matomo/matomo-service";
+import { matomoConfig } from "./matomo-config";
+import { getMultiSiteMatomoData } from "./matomo/matomo-service";
 import { getYoutubeData } from "./youtube/youtube-service";
 
 const app = express();
@@ -25,7 +26,11 @@ app.get("/healthz", (req, res) => {
 });
 
 app.get("/statistics", (req, res) => {
-  void Promise.all([getMatomoData(), getYoutubeData(), getGitHubData()])
+  void Promise.all([
+    getMultiSiteMatomoData(matomoConfig),
+    getYoutubeData(),
+    getGitHubData(),
+  ])
     .then(flatten)
     .then((data) => res.json(data));
 });
