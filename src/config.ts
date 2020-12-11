@@ -10,3 +10,4 @@ export const youtubeApiKey: string = process.env.YOUTUBE_API_KEY ?? "";
 export const youtubeChannelId: string = process.env.YOUTUBE_CHANNEL_ID ?? "";
 export const githubApiUrl: string = process.env.GITHUB_API_URL ?? "";
 export const githubApiKey: string = process.env.GITHUB_API_KEY ?? "";
+export const corsOrigins: string = process.env.CORS_ORIGINS ?? "";
