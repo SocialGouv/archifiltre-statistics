@@ -1,25 +1,17 @@
 import axios from "axios";
+import { flatten } from "lodash/fp";
 
 import type { ArchifiltreCountStatistic } from "../api-types";
 import { matomoToken, matomoUrl } from "../config";
-import type { MatomoEventCategory } from "./matomo-types";
+import type { MatomoEventCategory, MatomoSiteConfig } from "./matomo-types";
 import {
-  getBulkRequestParamsFromLabels,
+  getBulkRequestParamsFromConfig,
   sanitizeMatomoData,
 } from "./matomo-utils";
 
-const labels = [
-  "FileTreeDrop",
-  "CSV Export",
-  "CSV with hashes Export",
-  "Tree CSV Export",
-  "METS Export",
-  "Excel Export",
-  "RESIP Export",
-  "Audit report export",
-];
-
-const getBulkMatomoData = async (): Promise<MatomoEventCategory[][]> =>
+const getBulkMatomoData = async (
+  config: MatomoSiteConfig
+): Promise<MatomoEventCategory[][]> =>
   axios
     .get(matomoUrl, {
       params: {
@@ -28,10 +20,17 @@ const getBulkMatomoData = async (): Promise<MatomoEventCategory[][]> =>
         module: "API",
         // eslint-disable-next-line @typescript-eslint/naming-convention
         token_auth: matomoToken,
-        ...getBulkRequestParamsFromLabels(labels),
+        ...getBulkRequestParamsFromConfig(config),
       },
     })
     .then(({ data }: { data: MatomoEventCategory[][] }) => data);
 
-export const getMatomoData = async (): Promise<ArchifiltreCountStatistic[]> =>
-  getBulkMatomoData().then(sanitizeMatomoData);
+export const getMatomoData = async (
+  config: MatomoSiteConfig
+): Promise<ArchifiltreCountStatistic[]> =>
+  getBulkMatomoData(config).then(sanitizeMatomoData);
+
+export const getMultiSiteMatomoData = async (
+  configs: MatomoSiteConfig[]
+): Promise<ArchifiltreCountStatistic[]> =>
+  Promise.all(configs.map(getMatomoData)).then(flatten);

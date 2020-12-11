@@ -1,0 +1,28 @@
+import type { MatomoSiteConfig } from "./matomo/matomo-types";
+
+export const matomoConfig: MatomoSiteConfig[] = [
+  {
+    events: [
+      "FileTreeDrop",
+      "CSV Export",
+      "CSV with hashes Export",
+      "Tree CSV Export",
+      "METS Export",
+      "Excel Export",
+      "RESIP Export",
+      "Audit report export",
+    ],
+    idSite: 9,
+  },
+  {
+    actions: [
+      {
+        categoryId: 1,
+      },
+      {
+        categoryId: 3,
+      },
+    ],
+    idSite: 20,
+  },
+];

@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { MatomoEventCategory } from "./matomo-types";
+import { mapValues } from "lodash/fp";
+import querystring from "querystring";
+
+import type { MatomoEventCategory, MatomoSiteConfig } from "./matomo-types";
 import {
-  getBulkRequestParamsFromLabels,
+  getBulkRequestParamsFromConfig,
   sanitizeMatomoData,
 } from "./matomo-utils";
 
@@ -10,14 +13,44 @@ type TestData = {
 } & MatomoEventCategory;
 
 describe("matomoUtils", () => {
-  describe("getBulkRequestParamsFromLabels", () => {
+  describe("getBulkRequestParamsFromConfig", () => {
     it("should format the queryParams for matomo", () => {
-      const labels = ["label1", "label2"];
-      expect(getBulkRequestParamsFromLabels(labels)).toEqual({
-        "urls[0]":
-          "method=Events.getCategory&idSite=9&date=2019-04-17,today&period=range&label=label1",
-        "urls[1]":
-          "method=Events.getCategory&idSite=9&date=2019-04-17,today&period=range&label=label2",
+      const events = ["label1", "label2"];
+      const idSite = 9;
+      const actions = [
+        {
+          categoryId: 1,
+        },
+      ];
+      const siteConfig: MatomoSiteConfig = {
+        actions,
+        events,
+        idSite,
+      };
+      expect(
+        mapValues(querystring.parse)(getBulkRequestParamsFromConfig(siteConfig))
+      ).toEqual({
+        "urls[0]": {
+          date: "2019-04-17,today",
+          idSite: "9",
+          label: "label1",
+          method: "Events.getCategory",
+          period: "range",
+        },
+        "urls[1]": {
+          date: "2019-04-17,today",
+          idSite: "9",
+          label: "label2",
+          method: "Events.getCategory",
+          period: "range",
+        },
+        "urls[2]": {
+          date: "2019-04-17,today",
+          idSite: "9",
+          idSubtable: "1",
+          method: "Events.getActionFromCategoryId",
+          period: "range",
+        },
       });
     });
   });

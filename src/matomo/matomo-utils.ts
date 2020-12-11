@@ -1,30 +1,85 @@
 import { compose, flatten, map, mapKeys, pick } from "lodash/fp";
+import * as querystring from "querystring";
 
 import type { ArchifiltreCountStatistic } from "../api-types";
-import type { MatomoEventCategory } from "./matomo-types";
+import type {
+  MatomoActionConfigObject,
+  MatomoEventCategory,
+  MatomoEventConfig,
+  MatomoEventConfigObject,
+  MatomoSiteConfig,
+} from "./matomo-types";
 
-type CreateMatomoMethodParams = {
-  method: string;
-  label: string;
+type CreateMatomoEventCategoryMethodParams = {
+  config: MatomoEventConfig;
+  idSite: number;
 };
 
-const createMatomoMethod = ({ method, label }: CreateMatomoMethodParams) =>
-  `method=${method}&idSite=9&date=2019-04-17,today&period=range&label=${label}`;
+const sanitizeMatomoEventConfig = (
+  config: MatomoEventConfig
+): MatomoEventConfigObject =>
+  typeof config === "string"
+    ? {
+        label: config,
+      }
+    : config;
+
+const createMatomoRequestBaseParams = (
+  idSite: number
+): Record<string, string | number> => ({
+  date: "2019-04-17,today",
+  idSite,
+  period: "range",
+});
+
+const createMatomoEventCategoryMethod = ({
+  config,
+  idSite,
+}: CreateMatomoEventCategoryMethodParams) => {
+  const { label } = sanitizeMatomoEventConfig(config);
+  return querystring.stringify({
+    ...createMatomoRequestBaseParams(idSite),
+    label,
+    method: "Events.getCategory",
+  });
+};
+
+type CreateMatomoEventActionMethodParams = {
+  config: MatomoActionConfigObject;
+  idSite: number;
+};
+
+const createMatomoEventActionMethod = ({
+  config,
+  idSite,
+}: CreateMatomoEventActionMethodParams): string =>
+  querystring.stringify({
+    ...createMatomoRequestBaseParams(idSite),
+    idSubtable: config.categoryId,
+    method: "Events.getActionFromCategoryId",
+  });
 
 type RequestParams = Record<string, string>;
 
-export const getBulkRequestParamsFromLabels = (
-  labels: string[]
-): RequestParams =>
-  labels
-    .map((label) => createMatomoMethod({ label, method: "Events.getCategory" }))
-    .reduce(
-      (urlParams, urlParam, index) => ({
-        ...urlParams,
-        [`urls[${index}]`]: urlParam,
-      }),
-      {}
-    );
+export const getBulkRequestParamsFromConfig = ({
+  events = [],
+  actions = [],
+  idSite,
+}: MatomoSiteConfig): RequestParams =>
+  [
+    ...events.map((config) =>
+      createMatomoEventCategoryMethod({ config, idSite })
+    ),
+    ...actions.map((config) =>
+      createMatomoEventActionMethod({ config, idSite })
+    ),
+  ].reduce(
+    (urlParams, urlParam, index) => ({
+      ...urlParams,
+      [`urls[${index}]`]: urlParam,
+    }),
+    {}
+  );
 
 const keysMap: Record<string, string> = {
   label: "label",
