@@ -23,6 +23,7 @@ export const matomoConfig: MatomoSiteConfig[] = [
         categoryId: 3,
       },
     ],
+    events: ["download", "appDownload"],
     idSite: 20,
   },
 ];
