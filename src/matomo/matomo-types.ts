@@ -21,4 +21,5 @@ export type MatomoSiteConfig = {
   idSite: number;
   events?: MatomoEventConfig[];
   actions?: MatomoActionConfigObject[];
+  visits?: boolean;
 };

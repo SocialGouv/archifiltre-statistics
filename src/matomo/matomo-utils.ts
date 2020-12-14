@@ -59,11 +59,18 @@ const createMatomoEventActionMethod = ({
     method: "Events.getActionFromCategoryId",
   });
 
+const createMatomoVisitMethod = (idSite: number): string =>
+  querystring.stringify({
+    ...createMatomoRequestBaseParams(idSite),
+    method: "VisitTime.getVisitInformationPerLocalTime",
+  });
+
 type RequestParams = Record<string, string>;
 
 export const getBulkRequestParamsFromConfig = ({
   events = [],
   actions = [],
+  visits = false,
   idSite,
 }: MatomoSiteConfig): RequestParams =>
   [
@@ -73,6 +80,7 @@ export const getBulkRequestParamsFromConfig = ({
     ...actions.map((config) =>
       createMatomoEventActionMethod({ config, idSite })
     ),
+    visits ? createMatomoVisitMethod(idSite) : [],
   ].reduce(
     (urlParams, urlParam, index) => ({
       ...urlParams,
@@ -85,6 +93,7 @@ const keysMap: Record<string, string> = {
   label: "label",
   // eslint-disable-next-line @typescript-eslint/naming-convention
   nb_events: "value",
+  nb_visits: "value",
 };
 
 const convertMatomoDataToApiData = mapKeys(
@@ -95,6 +104,6 @@ export const sanitizeMatomoData: <T extends MatomoEventCategory>(
   matomoApiResponse: T[][]
 ) => ArchifiltreCountStatistic[] = compose(
   map(convertMatomoDataToApiData),
-  map(pick(["label", "nb_events"])),
+  map(pick(["label", "nb_events", "nb_visits"])),
   flatten
 );
