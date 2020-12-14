@@ -93,6 +93,7 @@ const keysMap: Record<string, string> = {
   label: "label",
   // eslint-disable-next-line @typescript-eslint/naming-convention
   nb_events: "value",
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   nb_visits: "value",
 };
 

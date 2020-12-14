@@ -15,14 +15,14 @@ export const matomoConfig: MatomoSiteConfig[] = [
     idSite: 9,
   },
   {
-    /*actions: [
+    actions: [
       {
         categoryId: 1,
       },
       {
         categoryId: 3,
       },
-    ],*/
+    ],
     events: ["download", "appDownload"],
     visits: true,
     idSite: 20,
