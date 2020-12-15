@@ -5,8 +5,8 @@ import type { ArchifiltreCountStatistic } from "../api-types";
 import { matomoToken, matomoUrl } from "../config";
 import type { MatomoEventCategory, MatomoSiteConfig } from "./matomo-types";
 import {
+  createMatomoDataSanitizer,
   getBulkRequestParamsFromConfig,
-  sanitizeMatomoData,
 } from "./matomo-utils";
 
 const getBulkMatomoData = async (
@@ -28,7 +28,7 @@ const getBulkMatomoData = async (
 export const getMatomoData = async (
   config: MatomoSiteConfig
 ): Promise<ArchifiltreCountStatistic[]> =>
-  getBulkMatomoData(config).then(sanitizeMatomoData);
+  getBulkMatomoData(config).then(createMatomoDataSanitizer(config));
 
 export const getMultiSiteMatomoData = async (
   configs: MatomoSiteConfig[]

@@ -1,4 +1,4 @@
-import { compose, flatten, map, mapKeys, pick } from "lodash/fp";
+import { flatten } from "lodash";
 import * as querystring from "querystring";
 
 import type { ArchifiltreCountStatistic } from "../api-types";
@@ -62,7 +62,7 @@ const createMatomoEventActionMethod = ({
 const createMatomoVisitMethod = (idSite: number): string =>
   querystring.stringify({
     ...createMatomoRequestBaseParams(idSite),
-    method: "VisitTime.getVisitInformationPerLocalTime",
+    method: "VisitsSummary.getVisits",
   });
 
 type RequestParams = Record<string, string>;
@@ -80,7 +80,7 @@ export const getBulkRequestParamsFromConfig = ({
     ...actions.map((config) =>
       createMatomoEventActionMethod({ config, idSite })
     ),
-    visits ? createMatomoVisitMethod(idSite) : [],
+    ...(visits ? [createMatomoVisitMethod(idSite)] : []),
   ].reduce(
     (urlParams, urlParam, index) => ({
       ...urlParams,
@@ -89,22 +89,28 @@ export const getBulkRequestParamsFromConfig = ({
     {}
   );
 
-const keysMap: Record<string, string> = {
-  label: "label",
+const formatEventsOrActionsResponse = () => (
+  eventCategories: MatomoEventCategory[]
+): ArchifiltreCountStatistic[] =>
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  nb_events: "value",
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  nb_visits: "value",
-};
+  eventCategories.map(({ label, nb_events }) => ({ label, value: nb_events }));
 
-const convertMatomoDataToApiData = mapKeys(
-  (key: string): string => keysMap[key]
-);
+const formatVisitsResponse = () => (
+  value: number
+): ArchifiltreCountStatistic => ({ label: "visitsCount", value });
 
-export const sanitizeMatomoData: <T extends MatomoEventCategory>(
-  matomoApiResponse: T[][]
-) => ArchifiltreCountStatistic[] = compose(
-  map(convertMatomoDataToApiData),
-  map(pick(["label", "nb_events", "nb_visits"])),
-  flatten
-);
+export const createMatomoDataSanitizer = ({
+  events = [],
+  actions = [],
+  visits = false,
+}: MatomoSiteConfig) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  matomoApiResponse: any[]
+): ArchifiltreCountStatistic[] =>
+  flatten(
+    [
+      ...events.map(formatEventsOrActionsResponse),
+      ...actions.map(formatEventsOrActionsResponse),
+      ...(visits ? [formatVisitsResponse()] : []),
+    ].map((formatter, index) => formatter(matomoApiResponse[index]))
+  );
