@@ -1,4 +1,4 @@
-import type { MatomoSiteConfig } from "./matomo/matomo-types";
+import type { MatomoSiteConfig } from "./matomo-types";
 
 export const matomoConfig: MatomoSiteConfig[] = [
   {
@@ -25,5 +25,6 @@ export const matomoConfig: MatomoSiteConfig[] = [
     ],
     events: ["download", "appDownload"],
     idSite: 20,
+    visits: true,
   },
 ];

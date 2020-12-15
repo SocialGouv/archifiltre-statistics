@@ -5,7 +5,7 @@ import { flatten } from "lodash/fp";
 import packageJson from "../package.json";
 import { corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
-import { matomoConfig } from "./matomo-config";
+import { matomoConfig } from "./matomo/matomo-config";
 import { getMultiSiteMatomoData } from "./matomo/matomo-service";
 import { getYoutubeData } from "./youtube/youtube-service";
 

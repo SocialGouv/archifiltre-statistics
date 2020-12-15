@@ -4,13 +4,15 @@ import querystring from "querystring";
 
 import type { MatomoEventCategory, MatomoSiteConfig } from "./matomo-types";
 import {
+  createMatomoDataSanitizer,
   getBulkRequestParamsFromConfig,
-  sanitizeMatomoData,
 } from "./matomo-utils";
 
-type TestData = {
-  otherKey: string;
-} & MatomoEventCategory;
+type TestData =
+  | ({
+      otherKey: string;
+    } & MatomoEventCategory)[]
+  | number;
 
 describe("matomoUtils", () => {
   describe("getBulkRequestParamsFromConfig", () => {
@@ -55,9 +57,23 @@ describe("matomoUtils", () => {
     });
   });
 
-  describe("sanitizeMatomoData", () => {
+  describe("createMatomoDataSanitizer", () => {
     it("should remove unwanted data and flatten", () => {
-      const matomoData: TestData[][] = [
+      const events = ["label1", "label2"];
+      const idSite = 9;
+      const actions = [
+        {
+          categoryId: 1,
+        },
+      ];
+      const visits = true;
+      const siteConfig: MatomoSiteConfig = {
+        actions,
+        events,
+        idSite,
+        visits,
+      };
+      const matomoData: TestData[] = [
         [
           {
             label: "label",
@@ -68,9 +84,11 @@ describe("matomoUtils", () => {
         ],
         // eslint-disable-next-line @typescript-eslint/naming-convention
         [{ label: "label2", nb_events: 20, otherKey: "otherKey" }],
+        [{ label: "label3", nb_events: 30, otherKey: "otherKey" }],
+        42,
       ];
 
-      expect(sanitizeMatomoData(matomoData)).toEqual([
+      expect(createMatomoDataSanitizer(siteConfig)(matomoData)).toEqual([
         {
           label: "label",
           value: 10,
@@ -78,6 +96,14 @@ describe("matomoUtils", () => {
         {
           label: "label2",
           value: 20,
+        },
+        {
+          label: "label3",
+          value: 30,
+        },
+        {
+          label: "visitsCount",
+          value: 42,
         },
       ]);
     });
