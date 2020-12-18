@@ -33,21 +33,21 @@ describe("matomoUtils", () => {
         mapValues(querystring.parse)(getBulkRequestParamsFromConfig(siteConfig))
       ).toEqual({
         "urls[0]": {
-          date: "2019-04-17,today",
+          date: "2020-01-01,today",
           idSite: "9",
           label: "label1",
           method: "Events.getCategory",
           period: "range",
         },
         "urls[1]": {
-          date: "2019-04-17,today",
+          date: "2020-01-01,today",
           idSite: "9",
           label: "label2",
           method: "Events.getCategory",
           period: "range",
         },
         "urls[2]": {
-          date: "2019-04-17,today",
+          date: "2020-01-01,today",
           idSite: "9",
           idSubtable: "1",
           method: "Events.getActionFromCategoryId",
