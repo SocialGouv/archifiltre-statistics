@@ -15,8 +15,12 @@ export const createCache = <T>(
   let refreshTimeout: NodeJS.Timeout | null = null;
   const refresh = async () => {
     refreshTimeout?.unref();
-    cacheData = await fetchData();
-    lastFetchTimestamp = Date.now();
+    try {
+      cacheData = await fetchData();
+      lastFetchTimestamp = Date.now();
+    } catch (error: unknown) {
+      console.error(error);
+    }
     refreshTimeout = setTimeout(() => void refresh(), ttl);
   };
   void refresh();
