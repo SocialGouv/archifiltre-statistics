@@ -13,7 +13,7 @@ export type MatomoActionConfigObject = {
   categoryId: number;
 };
 
-export type MatomoEventConfig = string | MatomoEventConfigObject;
+export type MatomoEventConfig = MatomoEventConfigObject | string;
 
 export type MatomoSiteConfig = {
   idSite: number;
