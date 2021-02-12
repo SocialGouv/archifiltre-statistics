@@ -10,7 +10,7 @@ export const createCache = <T>(
   fetchData: FetchData<T>,
   ttl: number
 ): CacheObject<T> => {
-  let cacheData: null | T = null;
+  let cacheData: T | null = null;
   let lastFetchTimestamp = 0;
   let refreshTimeout: NodeJS.Timeout | null = null;
   const refresh = async () => {

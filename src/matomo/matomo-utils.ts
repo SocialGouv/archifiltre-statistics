@@ -26,7 +26,7 @@ const sanitizeMatomoEventConfig = (
 
 const createMatomoRequestBaseParams = (
   idSite: number
-): Record<string, string | number> => ({
+): Record<string, number | string> => ({
   date: "2020-01-01,today",
   idSite,
   period: "range",

@@ -9,9 +9,9 @@ import {
 } from "./matomo-utils";
 
 type TestData =
-  | ({
+  | (MatomoEventCategory & {
       otherKey: string;
-    } & MatomoEventCategory)[]
+    })[]
   | number;
 
 describe("matomoUtils", () => {
