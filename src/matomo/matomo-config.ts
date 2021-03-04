@@ -25,6 +25,7 @@ export const matomoConfig: MatomoSiteConfig[] = [
     ],
     events: ["download", "appDownload"],
     idSite: 20,
+    monthlyEvents: ["download", "appDownload"],
     visits: true,
   },
 ];

@@ -16,6 +16,6 @@ export const getGitHubData = async (): Promise<ArchifiltreCountStatistic[]> =>
     .then(filterWikiItem)
     .then(convertGitHubDataToApiData)
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return [];
     });
