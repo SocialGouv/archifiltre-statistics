@@ -1,4 +1,4 @@
 export type ArchifiltreCountStatistic = {
   label: string;
-  value: number;
+  value: Record<string, number> | number;
 };
