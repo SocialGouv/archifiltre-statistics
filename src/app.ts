@@ -4,13 +4,11 @@ import { flatten } from "lodash/fp";
 
 import packageJson from "../package.json";
 import { createCache } from "./caching/caching-service";
-import { corsOrigins, port } from "./config";
+import { cacheTTL, corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
 import { matomoConfig } from "./matomo/matomo-config";
 import { getMultiSiteMatomoData } from "./matomo/matomo-service";
 import { getYoutubeData } from "./youtube/youtube-service";
-
-const CACHE_TTL = 10 * 60 * 1000;
 
 const app = express();
 
@@ -35,7 +33,7 @@ const statsCache = createCache(
       getYoutubeData(),
       getGitHubData(),
     ]).then(flatten),
-  CACHE_TTL
+  cacheTTL
 );
 
 app.get("/statistics", (req, res) => {
