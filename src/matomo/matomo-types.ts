@@ -20,5 +20,6 @@ export type MatomoSiteConfig = {
   events?: MatomoEventConfig[];
   actions?: MatomoActionConfigObject[];
   monthlyEvents?: MatomoEventConfig[];
+  last30visits?: boolean;
   visits?: boolean;
 };

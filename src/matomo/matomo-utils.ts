@@ -30,11 +30,14 @@ const sanitizeMatomoEventConfig = (
       }
     : config;
 
+export const normalizeRequestDate = (date: string | [string, string]) =>
+  isString(date) ? date : date.join(",");
+
 const createMatomoRequestBaseParams = (
   idSite: number,
-  date: [string, string] = ["2020-01-01", "today"]
+  date: string | [string, string] = ["2020-01-01", "today"]
 ): Record<string, number | string> => ({
-  date: date.join(","),
+  date: normalizeRequestDate(date),
   idSite,
   period: "range",
 });
@@ -72,10 +75,11 @@ const createMatomoEventActionMethod = ({
     method: "Events.getActionFromCategoryId",
   });
 
-const createMatomoVisitMethod = (idSite: number): string =>
+const createMatomoVisitMethod = (idSite: number, date?: string): string =>
   querystring.stringify({
-    ...createMatomoRequestBaseParams(idSite),
+    ...createMatomoRequestBaseParams(idSite, date),
     method: "VisitsSummary.getVisits",
+    period: date ? "day" : "range",
   });
 
 type RequestParams = Record<string, string>;
@@ -99,6 +103,7 @@ export const getBulkRequestParamsFromConfig = ({
   events = [],
   actions = [],
   monthlyEvents = [],
+  last30visits = false,
   visits = false,
   idSite,
 }: MatomoSiteConfig): RequestParams =>
@@ -113,6 +118,7 @@ export const getBulkRequestParamsFromConfig = ({
       createMonthlyEventMethod({ config, idSite })
     ),
     ...(visits ? [createMatomoVisitMethod(idSite)] : []),
+    ...(last30visits ? [createMatomoVisitMethod(idSite, "last30")] : []),
   ].reduce(
     (urlParams, urlParam, index) => ({
       ...urlParams,
@@ -157,11 +163,19 @@ const formatVisitsResponse = () => (
   value: number
 ): ArchifiltreCountStatistic => ({ label: "visitsCount", value });
 
+const formatLastVisitsResponse = () => (
+  visitsMap: Record<string, number>
+): ArchifiltreCountStatistic => ({
+  label: "last30DaysVisits",
+  value: visitsMap,
+});
+
 export const createMatomoDataSanitizer = ({
   events = [],
   actions = [],
   monthlyEvents = [],
   visits = false,
+  last30visits = false,
 }: MatomoSiteConfig) => (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   matomoApiResponse: any[]
@@ -171,4 +185,5 @@ export const createMatomoDataSanitizer = ({
     ...actions.map(formatEventsOrActionsResponse),
     ...monthlyEvents.flatMap(formatMonthlyEvents),
     ...(visits ? [formatVisitsResponse()] : []),
+    ...(last30visits ? [formatLastVisitsResponse()] : []),
   ].flatMap((formatter, index) => formatter(matomoApiResponse[index]));

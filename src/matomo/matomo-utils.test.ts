@@ -6,6 +6,7 @@ import type { MatomoEventCategory, MatomoSiteConfig } from "./matomo-types";
 import {
   createMatomoDataSanitizer,
   getBulkRequestParamsFromConfig,
+  normalizeRequestDate,
 } from "./matomo-utils";
 
 type TestData =
@@ -106,6 +107,18 @@ describe("matomoUtils", () => {
           value: 42,
         },
       ]);
+    });
+  });
+
+  describe("normalizeRequestDate", () => {
+    it("should return a valid date string with an array of dates", () => {
+      expect(normalizeRequestDate(["yesterday", "today"])).toEqual(
+        "yesterday,today"
+      );
+    });
+
+    it("should return a valid date string with a single date", () => {
+      expect(normalizeRequestDate("yesterday")).toEqual("yesterday");
     });
   });
 });
