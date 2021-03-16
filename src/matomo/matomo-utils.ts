@@ -11,6 +11,7 @@ import type {
   MatomoEventConfig,
   MatomoEventConfigObject,
   MatomoSiteConfig,
+  MatomoUserCountry,
 } from "./matomo-types";
 
 const MONTHS_REQUESTED = 12;
@@ -82,6 +83,12 @@ const createMatomoVisitMethod = (idSite: number, date?: string): string =>
     period: date ? "day" : "range",
   });
 
+const createMatomoVisitorCountriesMethod = (idSite: number): string =>
+  querystring.stringify({
+    ...createMatomoRequestBaseParams(idSite),
+    method: "UserCountry.getCountry",
+  });
+
 type RequestParams = Record<string, string>;
 
 const getMatomoLastMonthsRange = getLastMonthsRanges(MONTHS_REQUESTED);
@@ -105,6 +112,7 @@ export const getBulkRequestParamsFromConfig = ({
   monthlyEvents = [],
   last30visits = false,
   visits = false,
+  visitorCountries = false,
   idSite,
 }: MatomoSiteConfig): RequestParams =>
   [
@@ -118,6 +126,7 @@ export const getBulkRequestParamsFromConfig = ({
       createMonthlyEventMethod({ config, idSite })
     ),
     ...(visits ? [createMatomoVisitMethod(idSite)] : []),
+    ...(visitorCountries ? [createMatomoVisitorCountriesMethod(idSite)] : []),
     ...(last30visits ? [createMatomoVisitMethod(idSite, "last30")] : []),
   ].reduce(
     (urlParams, urlParam, index) => ({
@@ -163,6 +172,17 @@ const formatVisitsResponse = () => (
   value: number
 ): ArchifiltreCountStatistic => ({ label: "visitsCount", value });
 
+const formatVisitorCountriesResponse = () => (
+  countries: MatomoUserCountry[]
+): ArchifiltreCountStatistic => ({
+  label: "visitorCountries",
+  value: countries.reduce(
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    (acc, { nb_visits, code }) => ({ ...acc, [code]: nb_visits }),
+    {}
+  ),
+});
+
 const formatLastVisitsResponse = () => (
   visitsMap: Record<string, number>
 ): ArchifiltreCountStatistic => ({
@@ -175,6 +195,7 @@ export const createMatomoDataSanitizer = ({
   actions = [],
   monthlyEvents = [],
   visits = false,
+  visitorCountries = false,
   last30visits = false,
 }: MatomoSiteConfig) => (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -185,5 +206,6 @@ export const createMatomoDataSanitizer = ({
     ...actions.map(formatEventsOrActionsResponse),
     ...monthlyEvents.flatMap(formatMonthlyEvents),
     ...(visits ? [formatVisitsResponse()] : []),
+    ...(visitorCountries ? [formatVisitorCountriesResponse()] : []),
     ...(last30visits ? [formatLastVisitsResponse()] : []),
   ].flatMap((formatter, index) => formatter(matomoApiResponse[index]));

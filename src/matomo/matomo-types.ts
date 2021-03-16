@@ -22,4 +22,11 @@ export type MatomoSiteConfig = {
   monthlyEvents?: MatomoEventConfig[];
   last30visits?: boolean;
   visits?: boolean;
+  visitorCountries?: boolean;
+};
+
+export type MatomoUserCountry = {
+  code: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  nb_visits: number;
 };

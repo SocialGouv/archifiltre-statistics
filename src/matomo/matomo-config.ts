@@ -13,6 +13,7 @@ export const matomoConfig: MatomoSiteConfig[] = [
       "Audit report export",
     ],
     idSite: 9,
+    visitorCountries: true,
   },
   {
     actions: [
