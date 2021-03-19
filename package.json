@@ -14,14 +14,14 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^26.0.21",
     "axios": "^0.21.0",
     "cors": "^2.8.5",
     "date-fns": "^2.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "lodash": "^4.17.21",
-    "ts-jest": "^26.5.3"
+    "ts-jest": "^26.5.4"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-typescript": "^1.55.0",
