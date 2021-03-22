@@ -13,3 +13,4 @@ export const githubApiKey: string = process.env.GITHUB_API_KEY ?? "";
 export const corsOrigins: string = process.env.CORS_ORIGINS ?? "";
 export const cacheTTL: number =
   parseInt(process.env.CACHE_TTL ?? "") || 10 * 60 * 1000;
+export const testText: string = process.env.TEST_KEY ?? "test-not-found";

@@ -4,7 +4,7 @@ import { flatten } from "lodash/fp";
 
 import packageJson from "../package.json";
 import { createCache } from "./caching/caching-service";
-import { cacheTTL, corsOrigins, port } from "./config";
+import { cacheTTL, corsOrigins, port, testText } from "./config";
 import { getGitHubData } from "./github/github-service";
 import { matomoConfig } from "./matomo/matomo-config";
 import { getMultiSiteMatomoData } from "./matomo/matomo-service";
@@ -40,6 +40,12 @@ app.get("/statistics", (req, res) => {
   res.json({
     lastFetchTimestamp: statsCache.getLastFetchTimestamp(),
     result: statsCache.read(),
+  });
+});
+
+app.get("/test", (req, res) => {
+  res.json({
+    text: testText,
   });
 });
 
