@@ -168,9 +168,14 @@ const formatMonthlyEvents = (config: MatomoEventConfig): ResultFormatter[] =>
       compose(map(formatMonthlyApiResult(config, date)), formatter)
     );
 
-const formatVisitsResponse = () => (
-  value: number
-): ArchifiltreCountStatistic => ({ label: "visitsCount", value });
+const formatVisitsResponse = () => ({
+  value,
+}: {
+  value: number;
+}): ArchifiltreCountStatistic => ({
+  label: "visitsCount",
+  value,
+});
 
 const formatVisitorCountriesResponse = () => (
   countries: MatomoUserCountry[]

@@ -13,7 +13,8 @@ type TestData =
   | (MatomoEventCategory & {
       otherKey: string;
     })[]
-  | number;
+  | number
+  | { value: number };
 
 describe("matomoUtils", () => {
   describe("getBulkRequestParamsFromConfig", () => {
@@ -86,7 +87,7 @@ describe("matomoUtils", () => {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         [{ label: "label2", nb_events: 20, otherKey: "otherKey" }],
         [{ label: "label3", nb_events: 30, otherKey: "otherKey" }],
-        42,
+        { value: 42 },
       ];
 
       expect(createMatomoDataSanitizer(siteConfig)(matomoData)).toEqual([
