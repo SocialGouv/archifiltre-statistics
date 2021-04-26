@@ -31,7 +31,7 @@ const sanitizeMatomoEventConfig = (
       }
     : config;
 
-export const normalizeRequestDate = (date: string | [string, string]) =>
+export const normalizeRequestDate = (date: string | [string, string]): string =>
   isString(date) ? date : date.join(",");
 
 const createMatomoRequestBaseParams = (
@@ -213,4 +213,5 @@ export const createMatomoDataSanitizer = ({
     ...(visits ? [formatVisitsResponse()] : []),
     ...(visitorCountries ? [formatVisitorCountriesResponse()] : []),
     ...(last30visits ? [formatLastVisitsResponse()] : []),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   ].flatMap((formatter, index) => formatter(matomoApiResponse[index]));
