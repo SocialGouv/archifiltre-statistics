@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/archifiltre-statistics/app:yz42
+            harbor.fabrique.social.gouv.fr/archifiltre-statistics/archifiltre-statistics:yz42
           livenessProbe:
             failureThreshold: 6
             httpGet:
