@@ -18,7 +18,7 @@ Build:
 # NOTE(julienbouquillon): use custom register job
 # By default, kosko-charts use a "/app" for default docker images names
 # TODO: discuss
-Register image:
+Register Kaniko image:
   extends: .autodevops_register_kaniko_image
   variables:
     IMAGE_NAME: archifiltre-statistics
