@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/archifiltre-statistics/archifiltre-statistics:yz42
+            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:yz42
           livenessProbe:
             failureThreshold: 6
             httpGet:
