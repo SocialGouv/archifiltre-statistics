@@ -1,8 +1,8 @@
-import { ApiParams } from "./../matomo-types";
 import querystring from "querystring";
-import { Loader } from "../matomo-types";
+
+import type { ArchifiltreCountStatistic } from "../../api-types";
+import type { ApiParams, Loader } from "../matomo-types";
 import { createMatomoRequestBaseParams } from "./loader-utils";
-import { ArchifiltreCountStatistic } from "../../api-types";
 
 const createMatomoVisitMethod = (idSite: number, date?: string): string =>
   querystring.stringify({
@@ -31,8 +31,8 @@ const visitsAggregator = () => ({
 ];
 
 export const totalVisitsLoader = (): Loader => ({
-  query: visitsQuery(),
   aggregator: visitsAggregator(),
+  query: visitsQuery(),
 });
 
 const last30visitsAggregator = () => (
@@ -45,6 +45,6 @@ const last30visitsAggregator = () => (
 ];
 
 export const last30DaysVisitsLoader = (): Loader => ({
-  query: visitsQuery({ date: "last30" }),
   aggregator: last30visitsAggregator(),
+  query: visitsQuery({ date: "last30" }),
 });

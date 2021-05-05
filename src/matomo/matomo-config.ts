@@ -1,11 +1,11 @@
+import { actionLoader } from "./loaders/actions-loader";
+import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
+import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import {
   last30DaysVisitsLoader,
   totalVisitsLoader,
 } from "./loaders/visits-loader";
-import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
-import { actionLoader } from "./loaders/actions-loader";
 import type { SiteConfig } from "./matomo-types";
-import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
 
 const ARCHIFILTRE_SITE_ID = 20;
 const ARCHIFILTRE_APP_ID = 9;

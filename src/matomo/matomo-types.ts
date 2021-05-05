@@ -33,7 +33,7 @@ export type MatomoUserCountry = {
   nb_visits: number;
 };
 
-export type MaybePromise<T> = T | Promise<T>;
+export type MaybePromise<T> = Promise<T> | T;
 
 export type ApiParams = {
   idSite: number;
@@ -41,6 +41,7 @@ export type ApiParams = {
 
 export type Loader = {
   query: (params: ApiParams) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   aggregator: (queryResponse: any) => ArchifiltreCountStatistic[];
 };
 

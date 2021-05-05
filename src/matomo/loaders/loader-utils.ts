@@ -1,3 +1,5 @@
+import { isString } from "lodash";
+
 import type {
   ApiParams,
   Loader,
@@ -5,8 +7,7 @@ import type {
   MatomoEventConfigObject,
   SiteConfig,
 } from "../matomo-types";
-
-import { isString } from "lodash";
+import type { ArchifiltreCountStatistic } from "./../../api-types";
 
 export const sanitizeMatomoEventConfig = (
   config: MatomoEventConfig
@@ -29,17 +30,22 @@ export const createMatomoRequestBaseParams = (
   period: "range",
 });
 
-export const runQuery = (loader: Loader, apiParams: ApiParams) =>
+export const runQuery = (loader: Loader, apiParams: ApiParams): string =>
   loader.query(apiParams);
 
-export const runAggregator = ({ aggregator }: Loader, response: any) =>
-  aggregator(response);
+export const runAggregator = (
+  { aggregator }: Loader,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
+  response: any
+): ArchifiltreCountStatistic[] => aggregator(response);
 
-export const getApiParams = ({ idSite }: SiteConfig) => ({
+export const getApiParams = ({ idSite }: SiteConfig): ApiParams => ({
   idSite,
 });
 
-export const convertQueriesToMatomoQueryObject = (paramsList: string[]) =>
+export const convertQueriesToMatomoQueryObject = (
+  paramsList: string[]
+): Record<string, string> =>
   paramsList.reduce(
     (urlParams, urlParam, index) => ({
       ...urlParams,

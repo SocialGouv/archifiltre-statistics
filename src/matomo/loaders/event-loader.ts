@@ -1,7 +1,8 @@
-import { getLastMonthsRanges } from "./../../utils/date";
 import { format, parseISO } from "date-fns/fp";
-import { compose, map } from "lodash/fp";
 import { isString } from "lodash";
+import { compose } from "lodash/fp";
+import * as querystring from "querystring";
+
 import type { ArchifiltreCountStatistic } from "../../api-types";
 import type {
   ApiParams,
@@ -9,11 +10,11 @@ import type {
   MatomoEventCategory,
   MatomoEventConfig,
 } from "../matomo-types";
+import { getLastMonthsRanges } from "./../../utils/date";
 import {
-  sanitizeMatomoEventConfig,
   createMatomoRequestBaseParams,
+  sanitizeMatomoEventConfig,
 } from "./loader-utils";
-import * as querystring from "querystring";
 
 type EventLoaderOptions = {
   label: string;
@@ -44,22 +45,23 @@ const createMatomoEventCategoryMethod = ({
 };
 
 const eventQuery = ({ label }: EventLoaderOptions) => ({ idSite }: ApiParams) =>
-  createMatomoEventCategoryMethod({ idSite, config: label });
+  createMatomoEventCategoryMethod({ config: label, idSite });
 
 export const formatEventsResponse = () => (
   eventCategories: MatomoEventCategory[]
 ): ArchifiltreCountStatistic[] =>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   eventCategories.map(({ label, nb_events }) => ({
     label,
     value: nb_events,
   }));
 
-const eventAggregator = ({ label }: EventLoaderOptions) => (response: any) =>
+const eventAggregator = () => (response: MatomoEventCategory[]) =>
   formatEventsResponse()(response);
 
 export const eventLoader = ({ label }: EventLoaderOptions): Loader => ({
+  aggregator: eventAggregator(),
   query: eventQuery({ label }),
-  aggregator: eventAggregator({ label }),
 });
 
 const MONTHS_REQUESTED = 12;
@@ -85,13 +87,9 @@ type MonthlyEventQueryOptions = {
 
 const monthlyEventQuery = ({ config, date }: MonthlyEventQueryOptions) => ({
   idSite,
-}: ApiParams) => createMonthlyEventMethod({ config, idSite, date });
+}: ApiParams) => createMonthlyEventMethod({ config, date, idSite });
 
 const formatResultDate = compose(format("y-MM"), parseISO);
-
-type ResultFormatter = (
-  eventCategories: MatomoEventCategory[]
-) => ArchifiltreCountStatistic[];
 
 const getConfigLabel = (config: MatomoEventConfig) =>
   isString(config) ? config : config.label;
@@ -106,10 +104,12 @@ const formatMonthlyApiResult = (config: MatomoEventConfig, date: string) => ({
 const monthlyEventsAggregator = (
   config: MatomoEventConfig,
   date: [string, string]
-) => (response: any) => [formatMonthlyApiResult(config, date[0])(response)];
+) => (response: ArchifiltreCountStatistic) => [
+  formatMonthlyApiResult(config, date[0])(response),
+];
 
 export const monthlyEventLoaders = (config: EventLoaderOptions): Loader[] =>
   getMatomoLastMonthsRange(new Date()).map((date) => ({
-    query: monthlyEventQuery({ config, date }),
     aggregator: monthlyEventsAggregator(config, date),
+    query: monthlyEventQuery({ config, date }),
   }));

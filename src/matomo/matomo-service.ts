@@ -11,11 +11,7 @@ import {
   runAggregator,
   runQuery,
 } from "./loaders/loader-utils";
-import type {
-  MatomoEventCategory,
-  MatomoSiteConfig,
-  SiteConfig,
-} from "./matomo-types";
+import type { MatomoEventCategory, SiteConfig } from "./matomo-types";
 
 type BulkRequestData = {
   data: MatomoEventCategory[][];
@@ -49,6 +45,7 @@ const getBulkMatomoData = compose(
   getBulkRequestParamsFromConfig
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const createMatomoDataSanitizer = (config: SiteConfig) => (response: any[]) =>
   config.loaders.flatMap((loader, index) =>
     runAggregator(loader, response[index])

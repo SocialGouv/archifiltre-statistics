@@ -1,8 +1,13 @@
-import { ApiParams, Loader, MatomoEventCategory } from "./../matomo-types";
 import * as querystring from "querystring";
-import type { MatomoActionConfigObject } from "../matomo-types";
+
+import type { ArchifiltreCountStatistic } from "../../api-types";
+import type {
+  ApiParams,
+  Loader,
+  MatomoActionConfigObject,
+  MatomoEventCategory,
+} from "../matomo-types";
 import { createMatomoRequestBaseParams } from "./loader-utils";
-import { ArchifiltreCountStatistic } from "../../api-types";
 
 type CreateMatomoEventActionMethodParams = {
   config: MatomoActionConfigObject;
@@ -26,15 +31,16 @@ const actionQuery = (config: MatomoActionConfigObject) => ({
 const formatActionsResponse = () => (
   actionCategories: MatomoEventCategory[]
 ): ArchifiltreCountStatistic[] =>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   actionCategories.map(({ label, nb_events }) => ({
     label,
     value: nb_events,
   }));
 
-const actionAggregator = () => (response: any) =>
+const actionAggregator = () => (response: MatomoEventCategory[]) =>
   formatActionsResponse()(response);
 
 export const actionLoader = (config: MatomoActionConfigObject): Loader => ({
-  query: actionQuery(config),
   aggregator: actionAggregator(),
+  query: actionQuery(config),
 });
