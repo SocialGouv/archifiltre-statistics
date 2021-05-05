@@ -1,3 +1,4 @@
+import { actionLoader } from "./loaders/actions-loader";
 import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
 import { eventLoader } from "./loaders/event-loader";
 
@@ -21,6 +22,8 @@ export const matomoConfig: SiteConfig[] = [
   {
     idSite: ARCHIFILTRE_SITE_ID,
     loaders: [
+      actionLoader({ categoryId: 1 }),
+      actionLoader({ categoryId: 3 }),
       eventLoader({ label: "download" }),
       eventLoader({ label: "appDownload" }),
     ],
@@ -29,11 +32,6 @@ export const matomoConfig: SiteConfig[] = [
 
 export const oldmatomoConfig: MatomoSiteConfig[] = [
   {
-    actions: [
-      {
-        categoryId: 1,
-      },
-    ],
     events: [
       "FileTreeDrop",
       "CSV Export",

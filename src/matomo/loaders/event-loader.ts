@@ -42,7 +42,7 @@ const createMatomoEventCategoryMethod = ({
 const eventQuery = ({ label }: EventLoaderOptions) => ({ idSite }: ApiParams) =>
   createMatomoEventCategoryMethod({ idSite, config: label });
 
-export const formatEventsOrActionsResponse = () => (
+export const formatEventsResponse = () => (
   eventCategories: MatomoEventCategory[]
 ): ArchifiltreCountStatistic[] =>
   eventCategories.map(({ label, nb_events }) => ({
@@ -52,7 +52,7 @@ export const formatEventsOrActionsResponse = () => (
 
 const eventAggregator = ({ label }: EventLoaderOptions) => (response: any) => {
   console.log("event aggregator ", response);
-  return formatEventsOrActionsResponse()(response);
+  return formatEventsResponse()(response);
 };
 
 export const eventLoader = ({ label }: EventLoaderOptions): Loader => ({
