@@ -1,3 +1,7 @@
+import {
+  last30DaysVisitsLoader,
+  totalVisitsLoader,
+} from "./loaders/visits-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import { actionLoader } from "./loaders/actions-loader";
 import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
@@ -28,6 +32,8 @@ export const matomoConfig: SiteConfig[] = [
       actionLoader({ categoryId: 3 }),
       eventLoader({ label: "download" }),
       eventLoader({ label: "appDownload" }),
+      totalVisitsLoader(),
+      last30DaysVisitsLoader(),
     ],
   },
 ];

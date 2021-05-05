@@ -31,13 +31,6 @@ export const createMatomoEventActionMethod = ({
     method: "Events.getActionFromCategoryId",
   });
 
-const createMatomoVisitMethod = (idSite: number, date?: string): string =>
-  querystring.stringify({
-    ...createMatomoRequestBaseParams(idSite, date),
-    method: "VisitsSummary.getVisits",
-    period: date ? "day" : "range",
-  });
-
 type RequestParams = Record<string, string>;
 
 const getMatomoLastMonthsRange = getLastMonthsRanges(MONTHS_REQUESTED);
