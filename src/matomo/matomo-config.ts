@@ -4,7 +4,7 @@ import {
 } from "./loaders/visits-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import { actionLoader } from "./loaders/actions-loader";
-import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
+import type { SiteConfig } from "./matomo-types";
 import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
 
 const ARCHIFILTRE_SITE_ID = 20;
@@ -37,37 +37,5 @@ export const matomoConfig: SiteConfig[] = [
       ...monthlyEventLoaders({ label: "download" }),
       ...monthlyEventLoaders({ label: "appDownload" }),
     ],
-  },
-];
-
-export const oldmatomoConfig: MatomoSiteConfig[] = [
-  {
-    events: [
-      "FileTreeDrop",
-      "CSV Export",
-      "CSV with hashes Export",
-      "Tree CSV Export",
-      "METS Export",
-      "Excel Export",
-      "RESIP Export",
-      "Audit report export",
-    ],
-    idSite: ARCHIFILTRE_APP_ID,
-    visitorCountries: true,
-  },
-  {
-    actions: [
-      {
-        categoryId: 1,
-      },
-      {
-        categoryId: 3,
-      },
-    ],
-    events: ["download", "appDownload"],
-    idSite: ARCHIFILTRE_SITE_ID,
-    last30visits: true,
-    monthlyEvents: ["download", "appDownload"],
-    visits: true,
   },
 ];

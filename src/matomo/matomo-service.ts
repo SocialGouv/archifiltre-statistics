@@ -26,9 +26,8 @@ const getBulkRequestParamsFromConfig = (config: SiteConfig): string[] =>
 
 const makeBulkRequest = async (
   params: Record<string, string>
-): Promise<BulkRequestData> => {
-  console.log("make bulk req", params);
-  return axios.post(
+): Promise<BulkRequestData> =>
+  axios.post(
     matomoUrl,
     querystring.stringify({
       format: "JSON",
@@ -39,7 +38,6 @@ const makeBulkRequest = async (
       ...params,
     })
   );
-};
 
 const formatResult = ({ data }: BulkRequestData): MatomoEventCategory[][] =>
   data;
