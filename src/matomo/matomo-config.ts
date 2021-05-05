@@ -1,7 +1,39 @@
-import type { MatomoSiteConfig } from "./matomo-types";
+import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
+import { eventLoader } from "./loaders/event-loader";
 
-export const matomoConfig: MatomoSiteConfig[] = [
+const ARCHIFILTRE_SITE_ID = 20;
+const ARCHIFILTRE_APP_ID = 9;
+
+export const matomoConfig: SiteConfig[] = [
   {
+    idSite: ARCHIFILTRE_APP_ID,
+    loaders: [
+      eventLoader({ label: "FileTreeDrop" }),
+      eventLoader({ label: "CSV Export" }),
+      eventLoader({ label: "CSV with hashes Export" }),
+      eventLoader({ label: "Tree CSV Export" }),
+      eventLoader({ label: "METS Export" }),
+      eventLoader({ label: "Excel Export" }),
+      eventLoader({ label: "RESIP Export" }),
+      eventLoader({ label: "Audit report export" }),
+    ],
+  },
+  {
+    idSite: ARCHIFILTRE_SITE_ID,
+    loaders: [
+      eventLoader({ label: "download" }),
+      eventLoader({ label: "appDownload" }),
+    ],
+  },
+];
+
+export const oldmatomoConfig: MatomoSiteConfig[] = [
+  {
+    actions: [
+      {
+        categoryId: 1,
+      },
+    ],
     events: [
       "FileTreeDrop",
       "CSV Export",
@@ -12,7 +44,7 @@ export const matomoConfig: MatomoSiteConfig[] = [
       "RESIP Export",
       "Audit report export",
     ],
-    idSite: 9,
+    idSite: ARCHIFILTRE_APP_ID,
     visitorCountries: true,
   },
   {
@@ -25,7 +57,7 @@ export const matomoConfig: MatomoSiteConfig[] = [
       },
     ],
     events: ["download", "appDownload"],
-    idSite: 20,
+    idSite: ARCHIFILTRE_SITE_ID,
     last30visits: true,
     monthlyEvents: ["download", "appDownload"],
     visits: true,

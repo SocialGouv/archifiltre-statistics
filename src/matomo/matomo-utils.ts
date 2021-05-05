@@ -16,57 +16,12 @@ import type {
 
 const MONTHS_REQUESTED = 12;
 
-type CreateMatomoEventCategoryMethodParams = {
-  config: MatomoEventConfig;
-  idSite: number;
-  date?: [string, string];
-};
-
-const sanitizeMatomoEventConfig = (
-  config: MatomoEventConfig
-): MatomoEventConfigObject =>
-  typeof config === "string"
-    ? {
-        label: config,
-      }
-    : config;
-
-export const normalizeRequestDate = (date: string | [string, string]): string =>
-  isString(date) ? date : date.join(",");
-
-const createMatomoRequestBaseParams = (
-  idSite: number,
-  date: string | [string, string] = ["2020-01-01", "today"]
-): Record<string, number | string> => ({
-  date: normalizeRequestDate(date),
-  idSite,
-  period: "range",
-});
-
-const createMatomoEventCategoryMethod = ({
-  config,
-  idSite,
-  date,
-}: CreateMatomoEventCategoryMethodParams) => {
-  const { label } = sanitizeMatomoEventConfig(config);
-  return querystring.stringify(
-    {
-      ...createMatomoRequestBaseParams(idSite, date),
-      label,
-      method: "Events.getCategory",
-    },
-    "&",
-    "=",
-    { encodeURIComponent: (val) => val }
-  );
-};
-
 type CreateMatomoEventActionMethodParams = {
   config: MatomoActionConfigObject;
   idSite: number;
 };
 
-const createMatomoEventActionMethod = ({
+export const createMatomoEventActionMethod = ({
   config,
   idSite,
 }: CreateMatomoEventActionMethodParams): string =>
@@ -136,12 +91,6 @@ export const getBulkRequestParamsFromConfig = ({
     {}
   );
 
-const formatEventsOrActionsResponse = () => (
-  eventCategories: MatomoEventCategory[]
-): ArchifiltreCountStatistic[] =>
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  eventCategories.map(({ label, nb_events }) => ({ label, value: nb_events }));
-
 const getConfigLabel = (config: MatomoEventConfig) =>
   isString(config) ? config : config.label;
 
@@ -195,6 +144,10 @@ const formatLastVisitsResponse = () => (
   value: visitsMap,
 });
 
+// const formatTotalAnalyzedData = () => () => {
+
+// }
+
 export const createMatomoDataSanitizer = ({
   events = [],
   actions = [],
@@ -215,3 +168,57 @@ export const createMatomoDataSanitizer = ({
     ...(last30visits ? [formatLastVisitsResponse()] : []),
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   ].flatMap((formatter, index) => formatter(matomoApiResponse[index]));
+
+const arrVolume = [
+  "Total volume: 1.2 Go; Files dropped: 203; Folders dropped: 59; .jse: 36; .docx: 8; .pptx: 10; .jpg: 3; .pdf: 59;",
+  "Total volume: 1.2 Go; Files dropped: 203; Folders dropped: 59; .jse: 36; .docx: 8; .pptx: 10; .jpg: 3; .pdf: 59;",
+  "Total volume: 10.2 Go; Files dropped: 203; Folders dropped: 59; .jse: 36; .docx: 8; .pptx: 10; .jpg: 3; .pdf: 59;",
+  "Total volume: 45.2 Go; Files dropped: 203; Folders dropped: 59; .jse: 36; .docx: 8; .pptx: 10; .jpg: 3; .pdf: 59;",
+  "Total volume: 1000.2 Mo; Files dropped: 203; Folders dropped: 59; .jse: 36; .docx: 8; .pptx: 10; .jpg: 3; .pdf: 59;",
+];
+
+const getTotalCarbonFootPrint = (arrToFormat: string[]) => {
+  // constants
+  const GIGA = "go";
+  const MEGA = "mo";
+  const FOOTPRINT_COEF = 1;
+
+  // array cache
+  let mega: number[] = [];
+  let giga: number[] = [];
+
+  // sanitize str to get only number and units
+  const convertStrToNumberAndUnit = (str: string) =>
+    str.toLocaleLowerCase().split(";")[0].replace("total volume:", "");
+
+  // remove units and convert to a float
+  const removeUnitAndConvertToNumber = (str: string, unit: string) =>
+    parseFloat(str.replace(unit, ""));
+
+  // add all values to respective cache
+  const addValueToCache = (str: string) => {
+    const _str = convertStrToNumberAndUnit(str);
+    _str.includes(GIGA)
+      ? giga.push(removeUnitAndConvertToNumber(_str, GIGA))
+      : mega.push(removeUnitAndConvertToNumber(_str, MEGA));
+  };
+
+  const convertAndStoreEachValue = (arr: string[]) => {
+    return arr.forEach((item: string) => {
+      return addValueToCache(item);
+    });
+  };
+
+  convertAndStoreEachValue(arrToFormat);
+
+  // get fixed value by 2 to avoid fat float
+  const getFixedBy2 = (number: number) => Number(number.toFixed(2));
+  const totalGiga = giga.reduce((acc: number, val: number) => acc + val, 0);
+  const totalMega = mega.reduce((acc: number, val: number) => acc + val, 0);
+  const totalCarbonFootprint = FOOTPRINT_COEF * (totalGiga + totalMega / 1000);
+  const totalCarbonFootprintFixed = getFixedBy2(totalCarbonFootprint);
+
+  console.log("ici", totalCarbonFootprintFixed);
+};
+
+getTotalCarbonFootPrint(arrVolume);

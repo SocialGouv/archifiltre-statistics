@@ -1,3 +1,5 @@
+import type { ArchifiltreCountStatistic } from "../api-types";
+
 export type MatomoEventCategory = {
   label: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -29,4 +31,20 @@ export type MatomoUserCountry = {
   code: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   nb_visits: number;
+};
+
+export type MaybePromise<T> = T | Promise<T>;
+
+export type ApiParams = {
+  idSite: number;
+};
+
+export type Loader = {
+  query: (params: ApiParams) => string;
+  aggregator: (queryResponse: any) => ArchifiltreCountStatistic[];
+};
+
+export type SiteConfig = {
+  idSite: number;
+  loaders: Loader[];
 };
