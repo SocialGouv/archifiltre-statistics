@@ -1,3 +1,4 @@
+import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import { actionLoader } from "./loaders/actions-loader";
 import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
 import { eventLoader } from "./loaders/event-loader";
@@ -17,6 +18,7 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "Excel Export" }),
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
+      visitorCountriesLoader(),
     ],
   },
   {
