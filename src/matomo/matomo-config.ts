@@ -5,7 +5,7 @@ import {
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import { actionLoader } from "./loaders/actions-loader";
 import type { MatomoSiteConfig, SiteConfig } from "./matomo-types";
-import { eventLoader } from "./loaders/event-loader";
+import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
 
 const ARCHIFILTRE_SITE_ID = 20;
 const ARCHIFILTRE_APP_ID = 9;
@@ -34,6 +34,8 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "appDownload" }),
       totalVisitsLoader(),
       last30DaysVisitsLoader(),
+      ...monthlyEventLoaders({ label: "download" }),
+      ...monthlyEventLoaders({ label: "appDownload" }),
     ],
   },
 ];
