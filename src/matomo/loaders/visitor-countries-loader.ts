@@ -1,7 +1,8 @@
-import { ApiParams, Loader, MatomoUserCountry } from "./../matomo-types";
 import * as querystring from "querystring";
+
+import type { ArchifiltreCountStatistic } from "../../api-types";
+import type { ApiParams, Loader, MatomoUserCountry } from "./../matomo-types";
 import { createMatomoRequestBaseParams } from "./loader-utils";
-import { ArchifiltreCountStatistic } from "../../api-types";
 
 const createMatomoVisitorCountriesMethod = (idSite: number): string =>
   querystring.stringify({
@@ -26,6 +27,6 @@ const visitorCountriesAggregator = () => (
 ];
 
 export const visitorCountriesLoader = (): Loader => ({
-  query: visitorCountriesQuery(),
   aggregator: visitorCountriesAggregator(),
+  query: visitorCountriesQuery(),
 });
