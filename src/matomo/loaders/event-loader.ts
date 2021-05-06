@@ -94,17 +94,17 @@ const formatResultDate = compose(format("y-MM"), parseISO);
 const getConfigLabel = (config: MatomoEventConfig) =>
   isString(config) ? config : config.label;
 
-const formatMonthlyApiResult = (config: MatomoEventConfig, date: string) => ({
-  value,
-}: ArchifiltreCountStatistic) => ({
+const formatMonthlyApiResult = (config: MatomoEventConfig, date: string) => (
+  response: MatomoEventCategory[]
+) => ({
   label: `${getConfigLabel(config)}:${formatResultDate(date)}`,
-  value,
+  value: response[0]?.nb_events || 0,
 });
 
 const monthlyEventsAggregator = (
   config: MatomoEventConfig,
   date: [string, string]
-) => (response: ArchifiltreCountStatistic) => [
+) => (response: MatomoEventCategory[]) => [
   formatMonthlyApiResult(config, date[0])(response),
 ];
 
