@@ -30,8 +30,10 @@ export const createMatomoRequestBaseParams = (
   period: "range",
 });
 
-export const runQuery = (loader: Loader, apiParams: ApiParams): string =>
-  loader.query(apiParams);
+export const runQuery = async (
+  loader: Loader,
+  apiParams: ApiParams
+): Promise<string> => loader.query(apiParams);
 
 export const runAggregator = (
   { aggregator }: Loader,

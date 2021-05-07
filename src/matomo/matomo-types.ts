@@ -12,7 +12,7 @@ export type MatomoEventConfigObject = {
 };
 
 export type MatomoActionConfigObject = {
-  categoryId: number;
+  categoryName: string;
 };
 
 export type MatomoEventConfig = MatomoEventConfigObject | string;
@@ -40,7 +40,7 @@ export type ApiParams = {
 };
 
 export type Loader = {
-  query: (params: ApiParams) => string;
+  query: (params: ApiParams) => MaybePromise<string>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   aggregator: (queryResponse: any) => ArchifiltreCountStatistic[];
 };
