@@ -1,22 +1,23 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { actionLoader } from "./actions-loader";
+import { actionLoader, createMatomoEventActionMethod } from "./actions-loader";
 
 describe("actions-loader", () => {
   it("should return a valid matomo query", () => {
     // Given
-    const apiParams = { categoryId: 1, idSite: 9 };
-    const { query } = actionLoader(apiParams);
+    const idSite = 9;
+    const config = { categoryId: 1 };
     const expectedResult =
       "date=2020-01-01%2Ctoday&idSite=9&period=range&idSubtable=1&method=Events.getActionFromCategoryId";
     // When
-    const matomoQuery = query(apiParams);
+    const query = createMatomoEventActionMethod({ config, idSite });
+
     // Then
-    expect(matomoQuery).toEqual(expectedResult);
+    expect(query).toEqual(expectedResult);
   });
 
   it("should return a valid action matomo object", () => {
     // Given
-    const apiParams = { categoryId: 1 };
+    const apiParams = { categoryName: "download" };
     const apiResult = [
       {
         avg_event_value: 0,

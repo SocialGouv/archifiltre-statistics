@@ -28,8 +28,8 @@ export const matomoConfig: SiteConfig[] = [
   {
     idSite: ARCHIFILTRE_SITE_ID,
     loaders: [
-      actionLoader({ categoryId: 1 }),
-      actionLoader({ categoryId: 3 }),
+      actionLoader({ categoryName: "download" }),
+      actionLoader({ categoryName: "appDownload" }),
       eventLoader({ label: "download" }),
       eventLoader({ label: "appDownload" }),
       totalVisitsLoader(),

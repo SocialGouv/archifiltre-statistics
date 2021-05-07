@@ -4,7 +4,7 @@ import querystring from "querystring";
 
 import type { ArchifiltreCountStatistic } from "../api-types";
 import { matomoToken, matomoUrl } from "../config";
-import { liftPromise } from "../utils/fp-util";
+import { bindPromise, liftPromise } from "../utils/fp-util";
 import {
   convertQueriesToMatomoQueryObject,
   getApiParams,
@@ -17,17 +17,25 @@ type BulkRequestData = {
   data: MatomoEventCategory[][];
 };
 
-const getBulkRequestParamsFromConfig = (config: SiteConfig): string[] =>
-  config.loaders.map((loader) => runQuery(loader, getApiParams(config)));
+const getBulkRequestParamsFromConfig = async (
+  config: SiteConfig
+): Promise<string[]> =>
+  Promise.all(
+    config.loaders.map(async (loader) => runQuery(loader, getApiParams(config)))
+  );
 
-const makeBulkRequest = async (
-  params: Record<string, string>
-): Promise<BulkRequestData> =>
+export type RequestMatomoParams = Record<string, string> & {
+  method: string;
+};
+
+export const requestMatomo = async (
+  params: RequestMatomoParams
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<{ data: any }> =>
   axios.post(
     matomoUrl,
     querystring.stringify({
       format: "JSON",
-      method: "API.getBulkRequest",
       module: "API",
       // eslint-disable-next-line @typescript-eslint/naming-convention
       token_auth: matomoToken,
@@ -35,13 +43,21 @@ const makeBulkRequest = async (
     })
   );
 
+const makeBulkRequest = async (
+  params: Record<string, string>
+): Promise<BulkRequestData> =>
+  requestMatomo({
+    method: "API.getBulkRequest",
+    ...params,
+  });
+
 const formatResult = ({ data }: BulkRequestData): MatomoEventCategory[][] =>
   data;
 
 const getBulkMatomoData = compose(
   liftPromise(formatResult),
-  makeBulkRequest,
-  convertQueriesToMatomoQueryObject,
+  bindPromise(makeBulkRequest),
+  liftPromise(convertQueriesToMatomoQueryObject),
   getBulkRequestParamsFromConfig
 );
 
