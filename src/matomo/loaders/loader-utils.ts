@@ -9,6 +9,8 @@ import type {
 } from "../matomo-types";
 import type { ArchifiltreCountStatistic } from "./../../api-types";
 
+export const RELEASE_DATA_3_1 = "2020-10-26";
+
 export const sanitizeMatomoEventConfig = (
   config: MatomoEventConfig
 ): MatomoEventConfigObject =>
