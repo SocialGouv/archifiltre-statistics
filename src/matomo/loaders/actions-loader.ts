@@ -13,6 +13,9 @@ import { createMatomoRequestBaseParams } from "./loader-utils";
 
 type MatomoActionConfig = {
   categoryId: number;
+  date?: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  filter_limit: number;
 };
 
 type CreateMatomoEventActionMethodParams = {
@@ -25,13 +28,16 @@ export const createMatomoEventActionMethod = ({
   idSite,
 }: CreateMatomoEventActionMethodParams): string =>
   querystring.stringify({
-    ...createMatomoRequestBaseParams(idSite),
+    ...createMatomoRequestBaseParams(idSite, config.date),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    filter_limit: config.filter_limit,
     idSubtable: config.categoryId,
     method: "Events.getActionFromCategoryId",
   });
 
 type MatomoActionQueryConfig = {
   categoryName: string;
+  date?: string;
 };
 
 type GetCategoryResponse = {
@@ -40,11 +46,13 @@ type GetCategoryResponse = {
   }[];
 };
 
-const actionQuery = (config: MatomoActionQueryConfig) => async ({
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const actionQuery = (config: MatomoActionQueryConfig) => async ({
   idSite,
 }: ApiParams) => {
+  const date = config.date ? `${config.date},today` : undefined;
   const params: RequestMatomoParams = {
-    ...createMatomoRequestBaseParams(idSite),
+    ...createMatomoRequestBaseParams(idSite, date),
     label: config.categoryName,
     method: "Events.getCategory",
   };
@@ -53,7 +61,12 @@ const actionQuery = (config: MatomoActionQueryConfig) => async ({
   }: GetCategoryResponse = await requestMatomo(params);
 
   return createMatomoEventActionMethod({
-    config: { categoryId: idsubdatatable },
+    config: {
+      categoryId: idsubdatatable,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      filter_limit: -1,
+      ...(config.date ? { date: `${config.date},today` } : {}),
+    },
     idSite,
   });
 };

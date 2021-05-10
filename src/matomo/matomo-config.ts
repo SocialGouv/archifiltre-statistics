@@ -1,5 +1,6 @@
 import { actionLoader } from "./loaders/actions-loader";
 import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
+import { totalFileDropLoader } from "./loaders/total-filedrop-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import {
   last30DaysVisitsLoader,
@@ -22,6 +23,7 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "Excel Export" }),
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
+      totalFileDropLoader({ categoryName: "FileTreeDrop" }),
       visitorCountriesLoader(),
     ],
   },
