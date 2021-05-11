@@ -35,7 +35,7 @@ export const createMatomoEventActionMethod = ({
     method: "Events.getActionFromCategoryId",
   });
 
-type MatomoActionQueryConfig = {
+export type MatomoActionQueryConfig = {
   categoryName: string;
   date?: string;
 };
