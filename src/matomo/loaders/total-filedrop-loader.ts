@@ -7,7 +7,7 @@ import type {
   MatomoEventCategory,
 } from "../matomo-types";
 import { actionQuery } from "./actions-loader";
-import { RELEASE_DATA_3_1 } from "./loader-utils";
+import { RELEASE_DATE_3_1 } from "./loader-utils";
 
 const totalFileDropAggregator = () => (
   response: MatomoEventCategory[]
@@ -28,7 +28,7 @@ export const totalFileDropLoader = (
   config: MatomoActionConfigObject
 ): Loader => ({
   aggregator: totalFileDropAggregator(),
-  query: actionQuery({ ...config, date: RELEASE_DATA_3_1 }),
+  query: actionQuery({ ...config, date: RELEASE_DATE_3_1 }),
 });
 
 const getTotalFileDrop = (fileDropVolumes: string[]): number => {

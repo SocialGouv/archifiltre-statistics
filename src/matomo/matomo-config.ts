@@ -1,5 +1,6 @@
 import { actionLoader } from "./loaders/actions-loader";
 import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
+import { markedToDeleteLoader } from "./loaders/marked-to-delete-files-loader";
 import { totalFileDropLoader } from "./loaders/total-filedrop-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import {
@@ -24,6 +25,7 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
       totalFileDropLoader({ categoryName: "FileTreeDrop" }),
+      markedToDeleteLoader({ categoryName: "Element marked to delete" }),
       visitorCountriesLoader(),
     ],
   },
