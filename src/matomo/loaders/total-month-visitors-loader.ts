@@ -1,7 +1,7 @@
 import * as querystring from "querystring";
 
 import type { ArchifiltreCountStatistic } from "../../api-types";
-import type { ApiParams, Loader } from "./../matomo-types";
+import type { ApiParams, Loader } from "../matomo-types";
 import {
   createMatomoRequestBaseParams,
   TOTAL_MONTH_VISITORS_DATE_RANGE,

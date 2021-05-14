@@ -2,7 +2,7 @@ import { actionLoader } from "./loaders/actions-loader";
 import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
 import { markedToDeleteLoader } from "./loaders/marked-to-delete-files-loader";
 import { totalFileDropLoader } from "./loaders/total-filedrop-loader";
-import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors";
+import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors-loader";
 import { totalMonthlyDownloadLoader } from "./loaders/total-monthly-download-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import {
