@@ -51,6 +51,7 @@ export const actionQuery = (config: MatomoActionQueryConfig) => async ({
   idSite,
 }: ApiParams) => {
   const date = config.date ? `${config.date},today` : undefined;
+
   const params: RequestMatomoParams = {
     ...createMatomoRequestBaseParams(idSite, date),
     label: config.categoryName,
