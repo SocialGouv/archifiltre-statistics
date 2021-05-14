@@ -15,6 +15,11 @@ export type MatomoActionConfigObject = {
   categoryName: string;
 };
 
+export type MatomoDownloadConfigObject = {
+  labelPattern: string;
+  date?: [string, string];
+};
+
 export type MatomoEventConfig = MatomoEventConfigObject | string;
 
 export type MatomoSiteConfig = {

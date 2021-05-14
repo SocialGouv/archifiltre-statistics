@@ -16,13 +16,15 @@ import {
   sanitizeMatomoEventConfig,
 } from "./loader-utils";
 
-type EventLoaderOptions = {
+export type EventLoaderOptions = {
   label: string;
+  period?: string;
 };
 
 type CreateMatomoEventCategoryMethodParams = {
   config: MatomoEventConfig;
   idSite: number;
+  period?: string;
   date?: [string, string];
 };
 
@@ -30,6 +32,7 @@ const createMatomoEventCategoryMethod = ({
   config,
   idSite,
   date,
+  period,
 }: CreateMatomoEventCategoryMethodParams) => {
   const { label } = sanitizeMatomoEventConfig(config);
   return querystring.stringify(
@@ -37,6 +40,7 @@ const createMatomoEventCategoryMethod = ({
       ...createMatomoRequestBaseParams(idSite, date),
       label,
       method: "Events.getCategory",
+      period: period ?? "range",
     },
     "&",
     "=",
@@ -44,8 +48,10 @@ const createMatomoEventCategoryMethod = ({
   );
 };
 
-const eventQuery = ({ label }: EventLoaderOptions) => ({ idSite }: ApiParams) =>
-  createMatomoEventCategoryMethod({ config: label, idSite });
+export const eventQuery = ({ label, period }: EventLoaderOptions) => ({
+  idSite,
+}: ApiParams): string =>
+  createMatomoEventCategoryMethod({ config: label, idSite, period });
 
 export const formatEventsResponse = () => (
   eventCategories: MatomoEventCategory[]
@@ -59,9 +65,9 @@ export const formatEventsResponse = () => (
 const eventAggregator = () => (response: MatomoEventCategory[]) =>
   formatEventsResponse()(response);
 
-export const eventLoader = ({ label }: EventLoaderOptions): Loader => ({
+export const eventLoader = ({ label, period }: EventLoaderOptions): Loader => ({
   aggregator: eventAggregator(),
-  query: eventQuery({ label }),
+  query: eventQuery({ label, period }),
 });
 
 const MONTHS_REQUESTED = 12;
