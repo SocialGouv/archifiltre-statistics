@@ -1,4 +1,8 @@
-import { last30DaysVisitsLoader, totalVisitsLoader } from "./visits-loader";
+import {
+  averageDailyVisitorsLoader,
+  last30DaysVisitsLoader,
+  totalVisitsLoader,
+} from "./visits-loader";
 
 describe("visits-loader", () => {
   describe("totalVisitsLoader", () => {
@@ -87,6 +91,20 @@ describe("visits-loader", () => {
 
       // THEN
       expect(aggregatedValue).toEqual(expectedResult);
+    });
+  });
+
+  describe("averageDailyVisitors", () => {
+    it("should return a valid daily average visitors count", () => {
+      jest.useFakeTimers("modern");
+      jest.setSystemTime(new Date(2021, 4, 18));
+      const { aggregator } = averageDailyVisitorsLoader();
+      const apiResponse = { value: 22921 };
+      const aggregatedValue = aggregator(apiResponse);
+      const expectedResult = [{ label: "averageDailyVisitors", value: 46 }];
+
+      expect(aggregatedValue).toEqual(expectedResult);
+      jest.useRealTimers();
     });
   });
 });
