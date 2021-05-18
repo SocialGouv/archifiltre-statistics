@@ -9,6 +9,7 @@ import type {
 } from "../matomo-types";
 import type { ArchifiltreCountStatistic } from "./../../api-types";
 
+export const DEFAULT_START_DATE = "2020-01-01";
 export const RELEASE_DATE_3_1 = "2020-10-26";
 export const RELEASE_DATE_3_2 = "2021-04-14";
 export const TOTAL_MONTH_VISITORS_DATE_RANGE: [string, string] = [

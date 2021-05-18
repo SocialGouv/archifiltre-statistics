@@ -1,8 +1,13 @@
+import { differenceInDays } from "date-fns";
+import { ceil } from "lodash/fp";
 import querystring from "querystring";
 
 import type { ArchifiltreCountStatistic } from "../../api-types";
 import type { ApiParams, Loader } from "../matomo-types";
-import { createMatomoRequestBaseParams } from "./loader-utils";
+import {
+  createMatomoRequestBaseParams,
+  DEFAULT_START_DATE,
+} from "./loader-utils";
 
 const createMatomoVisitMethod = (idSite: number, date?: string): string =>
   querystring.stringify({
@@ -47,4 +52,22 @@ const last30visitsAggregator = () => (
 export const last30DaysVisitsLoader = (): Loader => ({
   aggregator: last30visitsAggregator(),
   query: visitsQuery({ date: "last30" }),
+});
+
+const averageDailyVisitorsAggregator = () => (
+  dailyVisitorsMap: Record<string, number>
+): ArchifiltreCountStatistic[] => {
+  const diffInDays = differenceInDays(Date.now(), new Date(DEFAULT_START_DATE));
+  const averageDailyVisitors = ceil(dailyVisitorsMap.value / diffInDays);
+  return [
+    {
+      label: "averageDailyVisitors",
+      value: averageDailyVisitors,
+    },
+  ];
+};
+
+export const averageDailyVisitorsLoader = (): Loader => ({
+  aggregator: averageDailyVisitorsAggregator(),
+  query: visitsQuery(),
 });

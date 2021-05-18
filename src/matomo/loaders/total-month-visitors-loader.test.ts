@@ -1,4 +1,4 @@
-import { totalMonthVisitorsLoader } from "./total-month-visitors";
+import { totalMonthVisitorsLoader } from "./total-month-visitors-loader";
 
 describe("total-month-visitors", () => {
   it("should return a valid matomo query", () => {
