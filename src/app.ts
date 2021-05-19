@@ -8,6 +8,7 @@ import { cacheTTL, corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
 import { matomoConfig } from "./matomo/matomo-config";
 import { getMultiSiteMatomoData } from "./matomo/matomo-service";
+import { getTypeformData } from "./typeform/typeform-service";
 import { getYoutubeData } from "./youtube/youtube-service";
 
 const app = express();
@@ -32,10 +33,10 @@ const statsCache = createCache(
       getMultiSiteMatomoData(matomoConfig),
       getYoutubeData(),
       getGitHubData(),
+      getTypeformData(),
     ]).then(flatten),
   cacheTTL
 );
-
 app.get("/statistics", (req, res) => {
   res.json({
     lastFetchTimestamp: statsCache.getLastFetchTimestamp(),
