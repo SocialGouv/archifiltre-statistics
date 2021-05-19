@@ -2,7 +2,7 @@
 import { totalMonthlyDownloadLoader } from "./total-monthly-download-loader";
 
 describe("total-monthly-download", () => {
-  it("should return a correct matomo query", () => {
+  it("should return an accurate matomo query", () => {
     const config = { idSite: 20, labelPattern: "(appDownload|download)" };
     const { query } = totalMonthlyDownloadLoader(config);
 
