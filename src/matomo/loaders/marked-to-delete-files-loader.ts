@@ -41,13 +41,18 @@ export const markedToDeleteLoader = (
 
 const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
   const sanitizedMarkedToDeleteElements = markedToDeleteElements
-    .map((label) =>
-      label.toLowerCase().split("o;")[0].replace("volume to delete:", "")
+    .filter((filteredLabel) =>
+      filteredLabel.toLowerCase().includes("volume to delete")
     )
+    .map((label) => {
+      return label
+        .toLowerCase()
+        .split("o;")[0]
+        .replace("volume to delete:", "");
+    })
     .map((value) => parseInt(value))
     .reduce((acc, val) => acc + val, 0);
   const giga = Math.pow(10, 9);
   const volumeToGB = ceil(sanitizedMarkedToDeleteElements / giga);
-
   return volumeToGB;
 };
