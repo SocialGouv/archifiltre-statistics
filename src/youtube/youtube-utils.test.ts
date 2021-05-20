@@ -8,6 +8,7 @@ describe("youtube-utils", () => {
         items: [
           {
             statistics: {
+              subscriberCount: "20",
               viewCount: "10",
             },
           },
@@ -18,6 +19,10 @@ describe("youtube-utils", () => {
         {
           label: "youtubeViews",
           value: 10,
+        },
+        {
+          label: "youtubeSubscribers",
+          value: 20,
         },
       ]);
     });

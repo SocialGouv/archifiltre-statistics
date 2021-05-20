@@ -8,4 +8,8 @@ export const convertYoutubeDataToApiData = (
     label: "youtubeViews",
     value: +youtubeData.items[0].statistics.viewCount,
   },
+  {
+    label: "youtubeSubscribers",
+    value: +youtubeData.items[0].statistics.subscriberCount,
+  },
 ];
