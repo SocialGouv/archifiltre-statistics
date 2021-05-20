@@ -12,4 +12,4 @@ export const githubApiUrl: string = process.env.GITHUB_API_URL ?? "";
 export const githubApiKey: string = process.env.GITHUB_API_KEY ?? "";
 export const corsOrigins: string = process.env.CORS_ORIGINS ?? "";
 export const cacheTTL: number =
-  parseInt(process.env.CACHE_TTL ?? "") || 10 * 60 * 1000;
+  parseInt(process.env.CACHE_TTL ?? "") || 2 * 60 * 60 * 1000;
