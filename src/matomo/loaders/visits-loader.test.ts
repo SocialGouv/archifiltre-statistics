@@ -1,5 +1,5 @@
 import {
-  averageDailyVisitorsLoader,
+  averageMonthlyVisitorsLoader,
   last30DaysVisitsLoader,
   totalVisitsLoader,
 } from "./visits-loader";
@@ -98,10 +98,10 @@ describe("visits-loader", () => {
     it("should return a valid daily average visitors count", () => {
       jest.useFakeTimers("modern");
       jest.setSystemTime(new Date(2021, 4, 18));
-      const { aggregator } = averageDailyVisitorsLoader();
+      const { aggregator } = averageMonthlyVisitorsLoader();
       const apiResponse = { value: 22921 };
       const aggregatedValue = aggregator(apiResponse);
-      const expectedResult = [{ label: "averageDailyVisitors", value: 46 }];
+      const expectedResult = [{ label: "averageMonthlyVisitors", value: 1433 }];
 
       expect(aggregatedValue).toEqual(expectedResult);
       jest.useRealTimers();
