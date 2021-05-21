@@ -1,7 +1,7 @@
 import { totalMonthVisitorsLoader } from "./total-month-visitors-loader";
 
 describe("total-month-visitors", () => {
-  it("should return a valid matomo query", () => {
+  it("should return a correct matomo query", () => {
     const { query } = totalMonthVisitorsLoader();
     const apiParams = { date: ["2019-11-01", "today"], idSite: 9 };
     const matomoQuery = query(apiParams);
@@ -11,7 +11,7 @@ describe("total-month-visitors", () => {
     expect(matomoQuery).toEqual(expectedQuery);
   });
 
-  it("should return a valid matomo objects", () => {
+  it("should return a correct matomo objects", () => {
     const { aggregator } = totalMonthVisitorsLoader();
 
     const apiResult = {
