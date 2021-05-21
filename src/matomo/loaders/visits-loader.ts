@@ -61,6 +61,7 @@ const averageMonthlyVisitorsAggregator = () => (
     Date.now(),
     new Date(DEFAULT_START_DATE)
   );
+
   const averageMonthlyVisitors = ceil(dailyVisitorsMap.value / diffInMonths);
 
   return [
