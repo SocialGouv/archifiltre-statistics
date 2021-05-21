@@ -1,4 +1,4 @@
-import { differenceInDays } from "date-fns";
+import { differenceInMonths } from "date-fns";
 import { ceil } from "lodash/fp";
 import querystring from "querystring";
 
@@ -54,20 +54,25 @@ export const last30DaysVisitsLoader = (): Loader => ({
   query: visitsQuery({ date: "last30" }),
 });
 
-const averageDailyVisitorsAggregator = () => (
+const averageMonthlyVisitorsAggregator = () => (
   dailyVisitorsMap: Record<string, number>
 ): ArchifiltreCountStatistic[] => {
-  const diffInDays = differenceInDays(Date.now(), new Date(DEFAULT_START_DATE));
-  const averageDailyVisitors = ceil(dailyVisitorsMap.value / diffInDays);
+  const diffInMonths = differenceInMonths(
+    Date.now(),
+    new Date(DEFAULT_START_DATE)
+  );
+
+  const averageMonthlyVisitors = ceil(dailyVisitorsMap.value / diffInMonths);
+
   return [
     {
-      label: "averageDailyVisitors",
-      value: averageDailyVisitors,
+      label: "averageMonthlyVisitors",
+      value: averageMonthlyVisitors,
     },
   ];
 };
 
-export const averageDailyVisitorsLoader = (): Loader => ({
-  aggregator: averageDailyVisitorsAggregator(),
+export const averageMonthlyVisitorsLoader = (): Loader => ({
+  aggregator: averageMonthlyVisitorsAggregator(),
   query: visitsQuery(),
 });

@@ -6,7 +6,7 @@ import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors-loader"
 import { totalMonthlyDownloadLoader } from "./loaders/total-monthly-download-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
 import {
-  averageDailyVisitorsLoader,
+  averageMonthlyVisitorsLoader,
   last30DaysVisitsLoader,
   totalVisitsLoader,
 } from "./loaders/visits-loader";
@@ -31,7 +31,7 @@ export const matomoConfig: SiteConfig[] = [
       markedToDeleteLoader({ categoryName: "Element marked to delete" }),
       visitorCountriesLoader(),
       totalMonthVisitorsLoader(),
-      averageDailyVisitorsLoader(),
+      averageMonthlyVisitorsLoader(),
     ],
   },
   {
