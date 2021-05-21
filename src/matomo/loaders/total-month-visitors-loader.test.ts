@@ -11,7 +11,7 @@ describe("total-month-visitors", () => {
     expect(matomoQuery).toEqual(expectedQuery);
   });
 
-  it("should return a valid matomo objects", () => {
+  it("should return a correct matomo objects", () => {
     const { aggregator } = totalMonthVisitorsLoader();
 
     const apiResult = {
