@@ -95,7 +95,7 @@ describe("visits-loader", () => {
   });
 
   describe("averageDailyVisitors", () => {
-    it("should return a valid daily average visitors count", () => {
+    it("should return a correct monthly average visitors count", () => {
       jest.useFakeTimers("modern");
       jest.setSystemTime(new Date(2021, 4, 18));
       const { aggregator } = averageMonthlyVisitorsLoader();
