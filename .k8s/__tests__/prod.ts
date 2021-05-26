@@ -5,8 +5,8 @@ import { project } from "@socialgouv/kosko-charts/testing/fake/gitlab-ci.env";
 
 jest.setTimeout(1000 * 60);
 test("kosko generate --prod", async () => {
-  process.env.HARBOR_PROJECT = "1000jours";
+  process.env.HARBOR_PROJECT = "archifiltre";
   expect(
-    await getEnvManifests("prod", "", project("1000jours").prod)
+    await getEnvManifests("prod", "", project("archifiltre-statistics").prod)
   ).toMatchSnapshot();
 });

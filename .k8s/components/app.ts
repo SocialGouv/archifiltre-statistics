@@ -1,10 +1,14 @@
 import env from "@kosko/env";
 
 import { create } from "@socialgouv/kosko-charts/components/app";
+import { getHarborImagePath } from "@socialgouv/kosko-charts/utils";
 
 const manifests = create("app", {
   env,
-  config: { containerPort: 3000 },
+  config: {
+    containerPort: 3000,
+    image: getHarborImagePath({ name: "archifiltre-statistics" }),
+  },
   deployment: {
     container: {
       resources: {

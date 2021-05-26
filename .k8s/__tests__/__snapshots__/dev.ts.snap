@@ -10,7 +10,7 @@ metadata:
     field.cattle.io/projectId: c-f8qps:p-46tj7
     git/branch: beta-db-12
     git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/1000jours.git
+      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/archifiltre-statistics.git
     app.gitlab.com/app: socialgouv-archifiltre-statistics
     app.gitlab.com/env: beta-db-12-dev2
     app.gitlab.com/env.name: beta-db-12-dev2
@@ -61,7 +61,7 @@ spec:
     spec:
       containers:
         - image: >-
-            registry.gitlab.factory.social.gouv.fr/socialgouv/archifiltre-statistics/app:yz42
+            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:yz42
           livenessProbe:
             failureThreshold: 6
             httpGet:
