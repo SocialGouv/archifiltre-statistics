@@ -1,4 +1,3 @@
-import { actionLoader } from "./loaders/actions-loader";
 import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
 import { markedToDeleteLoader } from "./loaders/marked-to-delete-files-loader";
 import { totalFileDropLoader } from "./loaders/total-filedrop-loader";
@@ -37,8 +36,6 @@ export const matomoConfig: SiteConfig[] = [
   {
     idSite: ARCHIFILTRE_SITE_ID,
     loaders: [
-      actionLoader({ categoryName: "download" }),
-      actionLoader({ categoryName: "appDownload" }),
       eventLoader({ label: "download" }),
       eventLoader({ label: "appDownload" }),
       totalVisitsLoader(),
