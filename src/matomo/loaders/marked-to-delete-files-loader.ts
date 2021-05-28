@@ -11,6 +11,7 @@ import { actionQuery } from "./actions-loader";
 import { RELEASE_DATE_3_2 } from "./loader-utils";
 
 const FOOTPRINT_COEF = 19;
+const PAPER_EQUIVALENCE_COEF = 0.22;
 
 const markedToDeleteAggregator = () => (
   response: MatomoEventCategory[]
@@ -20,6 +21,10 @@ const markedToDeleteAggregator = () => (
     markedToDeleteElements
   );
   const carbonFootprint = ceil(computedMarkToDeleteVolumes * FOOTPRINT_COEF);
+  const carbonFootprintPaperEquivalence = getCarbonfootprintPaperEquivalence(
+    carbonFootprint
+  );
+
   return [
     {
       label: "totalMarkedToDelete",
@@ -28,6 +33,10 @@ const markedToDeleteAggregator = () => (
     {
       label: "carbonFootprintInGrams",
       value: carbonFootprint,
+    },
+    {
+      label: "carbonFootprintPaperEquivalence",
+      value: carbonFootprintPaperEquivalence,
     },
   ];
 };
@@ -56,3 +65,6 @@ const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
   const volumeToGB = ceil(sanitizedMarkedToDeleteElements / giga);
   return volumeToGB;
 };
+
+const getCarbonfootprintPaperEquivalence = (carbonFootprint: number): number =>
+  ceil(carbonFootprint * PAPER_EQUIVALENCE_COEF);
