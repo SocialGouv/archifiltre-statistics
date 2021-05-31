@@ -1,6 +1,6 @@
-import { eventLoader, monthlyEventLoaders } from "./loaders/event-loader";
-import { markedToDeleteLoader } from "./loaders/marked-to-delete-files-loader";
-import { totalFileDropLoader } from "./loaders/total-filedrop-loader";
+import { eventLoader } from "./loaders/event-loader";
+import { markedToDeleteLoaders } from "./loaders/marked-to-delete-files-loader";
+import { totalFileDropLoaders } from "./loaders/total-filedrop-loader";
 import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors-loader";
 import { totalMonthlyDownloadLoader } from "./loaders/total-monthly-download-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
@@ -26,8 +26,8 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "Excel Export" }),
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
-      totalFileDropLoader({ categoryName: "FileTreeDrop" }),
-      markedToDeleteLoader({ categoryName: "Element marked to delete" }),
+      ...totalFileDropLoaders({ categoryName: "FileTreeDrop" }),
+      ...markedToDeleteLoaders({ categoryName: "Element marked to delete" }),
       visitorCountriesLoader(),
       totalMonthVisitorsLoader(),
       averageMonthlyVisitorsLoader(),
@@ -40,8 +40,6 @@ export const matomoConfig: SiteConfig[] = [
       eventLoader({ label: "appDownload" }),
       totalVisitsLoader(),
       last30DaysVisitsLoader(),
-      ...monthlyEventLoaders({ label: "download" }),
-      ...monthlyEventLoaders({ label: "appDownload" }),
       totalMonthlyDownloadLoader({
         labelPattern: "(appDownload|download)",
       }),

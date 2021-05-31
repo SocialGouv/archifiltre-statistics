@@ -1,14 +1,22 @@
-import { endOfMonth, formatISO, startOfMonth, subMonths } from "date-fns";
+import {
+  differenceInWeeks,
+  endOfWeek,
+  formatISO,
+  startOfWeek,
+  subWeeks,
+} from "date-fns";
 import { range } from "lodash";
 
-export const getLastMonthsRanges = (monthCount: number) => (
+import { RELEASE_DATE_3_2 } from "../matomo/loaders/loader-utils";
+
+export const getLastWeeksRanges = (weekCount: number) => (
   now: Date
 ): [string, string][] =>
-  range(monthCount)
-    .map((index) => subMonths(now, index))
+  range(weekCount)
+    .map((index) => subWeeks(now, index))
     .map((date, index): [Date, Date] => [
-      startOfMonth(date),
-      index === 0 ? date : endOfMonth(date),
+      startOfWeek(date),
+      index === 0 ? date : endOfWeek(date),
     ])
     .map(
       (dates): [string, string] =>
@@ -17,3 +25,7 @@ export const getLastMonthsRanges = (monthCount: number) => (
           string
         ]
     );
+
+export const getMatomoLastWeeksRange = getLastWeeksRanges(
+  differenceInWeeks(Date.now(), new Date(RELEASE_DATE_3_2))
+);

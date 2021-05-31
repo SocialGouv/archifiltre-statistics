@@ -1,4 +1,4 @@
-import { totalFileDropLoader } from "./total-filedrop-loader";
+import { totalFileDropLoaders } from "./total-filedrop-loader";
 /* eslint-disable @typescript-eslint/naming-convention */
 
 describe("total-filedrop-loader", () => {
@@ -48,7 +48,7 @@ describe("total-filedrop-loader", () => {
           sum_event_value: 0,
         },
       ];
-      const { aggregator } = totalFileDropLoader(apiParams);
+      const [{ aggregator }] = totalFileDropLoaders(apiParams);
       const expectedValue = [{ label: "totalDropVolume", value: 11 }];
 
       // WHEN

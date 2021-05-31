@@ -1,15 +1,10 @@
+import { isString } from "lodash";
 import * as querystring from "querystring";
 
-import type { ArchifiltreCountStatistic } from "../../api-types";
-import type { RequestMatomoParams } from "../matomo-service";
-import { requestMatomo } from "../matomo-service";
-import type {
-  ApiParams,
-  Loader,
-  MatomoActionConfigObject,
-  MatomoEventCategory,
-} from "../matomo-types";
-import { createMatomoRequestBaseParams } from "./loader-utils";
+import { createMatomoRequestBaseParams } from "./loaders/loader-utils";
+import type { RequestMatomoParams } from "./matomo-service";
+import { requestMatomo } from "./matomo-service";
+import type { ApiParams } from "./matomo-types";
 
 type MatomoActionConfig = {
   categoryId: number;
@@ -37,7 +32,7 @@ export const createMatomoEventActionMethod = ({
 
 export type MatomoActionQueryConfig = {
   categoryName: string;
-  date?: string;
+  date?: string | [string, string];
 };
 
 type GetCategoryResponse = {
@@ -46,11 +41,14 @@ type GetCategoryResponse = {
   }[];
 };
 
+const getDate = (date: string | [string, string]) =>
+  isString(date) ? `${date},today` : date.join(",");
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const actionQuery = (config: MatomoActionQueryConfig) => async ({
   idSite,
 }: ApiParams) => {
-  const date = config.date ? `${config.date},today` : undefined;
+  const date = isString(config.date) ? `${config.date},today` : config.date;
 
   const params: RequestMatomoParams = {
     ...createMatomoRequestBaseParams(idSite, date),
@@ -66,25 +64,8 @@ export const actionQuery = (config: MatomoActionQueryConfig) => async ({
       categoryId: idsubdatatable,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       filter_limit: -1,
-      ...(config.date ? { date: `${config.date},today` } : {}),
+      ...(config.date ? { date: getDate(config.date) } : {}),
     },
     idSite,
   });
 };
-
-const formatActionsResponse = () => (
-  actionCategories: MatomoEventCategory[]
-): ArchifiltreCountStatistic[] =>
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  actionCategories.map(({ label, nb_events }) => ({
-    label,
-    value: nb_events,
-  }));
-
-const actionAggregator = () => (response: MatomoEventCategory[]) =>
-  formatActionsResponse()(response);
-
-export const actionLoader = (config: MatomoActionConfigObject): Loader => ({
-  aggregator: actionAggregator(),
-  query: actionQuery(config),
-});
