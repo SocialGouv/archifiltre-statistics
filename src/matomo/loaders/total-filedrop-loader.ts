@@ -1,13 +1,13 @@
 import { ceil } from "lodash";
 
 import type { ArchifiltreCountStatistic } from "../../api-types";
+import { getMatomoLastWeeksRange } from "../../utils/date";
+import { actionQuery } from "../matomo-action-query";
 import type {
   Loader,
   MatomoActionConfigObject,
   MatomoEventCategory,
 } from "../matomo-types";
-import { actionQuery } from "./actions-loader";
-import { RELEASE_DATE_3_2 } from "./loader-utils";
 
 const totalFileDropAggregator = () => (
   response: MatomoEventCategory[]
@@ -23,13 +23,6 @@ const totalFileDropAggregator = () => (
     },
   ];
 };
-
-export const totalFileDropLoader = (
-  config: MatomoActionConfigObject
-): Loader => ({
-  aggregator: totalFileDropAggregator(),
-  query: actionQuery({ ...config, date: RELEASE_DATE_3_2 }),
-});
 
 const getTotalFileDrop = (fileDropVolumes: string[]): number => {
   const GIGA = "go";
@@ -59,3 +52,11 @@ const getTotalFileDrop = (fileDropVolumes: string[]): number => {
 
   return ceil(totalGiga + totalMega / 1000);
 };
+
+export const totalFileDropLoaders = (
+  config: MatomoActionConfigObject
+): Loader[] =>
+  getMatomoLastWeeksRange(new Date()).map((date) => ({
+    aggregator: totalFileDropAggregator(),
+    query: actionQuery({ ...config, date }),
+  }));

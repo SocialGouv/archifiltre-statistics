@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { ceil } from "lodash";
 
+import type { ArchifiltreCountStatistic } from "../../api-types";
+import { getMatomoLastWeeksRange } from "../../utils/date";
+import { actionQuery } from "../matomo-action-query";
 import type {
   Loader,
   MatomoActionConfigObject,
   MatomoEventCategory,
 } from "../matomo-types";
-import type { ArchifiltreCountStatistic } from "./../../api-types";
-import { actionQuery } from "./actions-loader";
-import { RELEASE_DATE_3_2 } from "./loader-utils";
 
 const FOOTPRINT_COEF = 19;
 const PAPER_EQUIVALENCE_COEF = 0.22;
@@ -41,13 +41,6 @@ const markedToDeleteAggregator = () => (
   ];
 };
 
-export const markedToDeleteLoader = (
-  config: MatomoActionConfigObject
-): Loader => ({
-  aggregator: markedToDeleteAggregator(),
-  query: actionQuery({ ...config, date: RELEASE_DATE_3_2 }),
-});
-
 const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
   const sanitizedMarkedToDeleteElements = markedToDeleteElements
     .filter((filteredLabel) =>
@@ -68,3 +61,11 @@ const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
 
 const getCarbonfootprintPaperEquivalence = (carbonFootprint: number): number =>
   ceil(carbonFootprint * PAPER_EQUIVALENCE_COEF);
+
+export const markedToDeleteLoaders = (
+  config: MatomoActionConfigObject
+): Loader[] =>
+  getMatomoLastWeeksRange(new Date()).map((date) => ({
+    aggregator: markedToDeleteAggregator(),
+    query: actionQuery({ ...config, date }),
+  }));

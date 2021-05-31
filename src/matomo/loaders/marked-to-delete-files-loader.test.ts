@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { createMatomoEventActionMethod } from "./actions-loader";
+import { createMatomoEventActionMethod } from "../matomo-action-query";
 import { RELEASE_DATE_3_2 } from "./loader-utils";
-import { markedToDeleteLoader } from "./marked-to-delete-files-loader";
+import { markedToDeleteLoaders } from "./marked-to-delete-files-loader";
 
 describe("marked-to-delete-files-loader", () => {
   it("should return a valid matomo query", () => {
@@ -55,7 +55,7 @@ describe("marked-to-delete-files-loader", () => {
       },
     ];
 
-    const { aggregator } = markedToDeleteLoader(apiParams);
+    const [{ aggregator }] = markedToDeleteLoaders(apiParams);
 
     const expectedResult = [
       {
