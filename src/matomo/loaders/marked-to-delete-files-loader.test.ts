@@ -63,6 +63,10 @@ describe("marked-to-delete-files-loader", () => {
         value: 1,
       },
       { label: "carbonFootprintInGrams", value: 19 },
+      {
+        label: "carbonFootprintPaperEquivalence",
+        value: 5,
+      },
     ];
 
     const aggregated = aggregator(apiResponse);
