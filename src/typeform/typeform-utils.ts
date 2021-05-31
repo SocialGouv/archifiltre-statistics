@@ -9,10 +9,12 @@ const getValueFromAnswerType = (answers: Answer[], type: string) =>
 export const sanitizeData = (
   items: TypeformDataItem[]
 ): ArchifiltreCountStatistic[] => {
-  const answers = items.map((item) => ({
-    opinion: getValueFromAnswerType(item.answers, "opinion_scale"),
-    rating: getValueFromAnswerType(item.answers, "rating"),
-  }));
+  const answers = items
+    .map((item) => ({
+      opinion: getValueFromAnswerType(item.answers, "opinion_scale"),
+      rating: getValueFromAnswerType(item.answers, "rating"),
+    }))
+    .filter((item) => item.opinion && item.rating);
 
   const averageRating = round(meanBy(answers, "rating"), 1);
   const averageOpinion = round(meanBy(answers, "opinion") * 10);
