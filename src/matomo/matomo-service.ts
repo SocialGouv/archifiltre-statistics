@@ -1,4 +1,5 @@
 import axios from "axios";
+import { reduce } from "lodash";
 import { compose, flatten } from "lodash/fp";
 import querystring from "querystring";
 
@@ -11,7 +12,11 @@ import {
   runAggregator,
   runQuery,
 } from "./loaders/loader-utils";
-import type { MatomoEventCategory, SiteConfig } from "./matomo-types";
+import type {
+  Aggregator,
+  MatomoEventCategory,
+  SiteConfig,
+} from "./matomo-types";
 
 type BulkRequestData = {
   data: MatomoEventCategory[][];
@@ -67,10 +72,20 @@ const createMatomoDataSanitizer = (config: SiteConfig) => (response: any[]) =>
     runAggregator(loader, response[index])
   );
 
+const aggregateValues = (
+  stats: ArchifiltreCountStatistic[],
+  aggregators: Aggregator[]
+): ArchifiltreCountStatistic[] =>
+  reduce(aggregators, (acc, aggregator) => aggregator(acc), stats);
+
 export const getMatomoData = async (
   config: SiteConfig
 ): Promise<ArchifiltreCountStatistic[]> =>
-  getBulkMatomoData(config).then(createMatomoDataSanitizer(config));
+  getBulkMatomoData(config)
+    .then(createMatomoDataSanitizer(config))
+    .then((stats) =>
+      config.aggregators ? aggregateValues(stats, config.aggregators) : stats
+    );
 
 export const getMultiSiteMatomoData = async (
   configs: SiteConfig[]

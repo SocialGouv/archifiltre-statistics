@@ -19,7 +19,7 @@ describe("marked-to-delete-files-loader", () => {
     expect(matomoQuery).toEqual(expectedQuery);
   });
 
-  it("should return a valid matomo object", () => {
+  it("should return a correct matomo object", () => {
     const apiParams = {
       categoryName: "Element marked to delete",
       date: RELEASE_DATE_3_2,
@@ -62,10 +62,10 @@ describe("marked-to-delete-files-loader", () => {
         label: "totalMarkedToDelete",
         value: 1,
       },
-      { label: "carbonFootprintInGrams", value: 19 },
+      { label: "carbonFootprintInKilo", value: 19 },
       {
         label: "carbonFootprintPaperEquivalence",
-        value: 5,
+        value: 4142,
       },
     ];
 

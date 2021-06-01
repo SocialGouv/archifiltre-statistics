@@ -50,7 +50,16 @@ export type Loader = {
   aggregator: (queryResponse: any) => ArchifiltreCountStatistic[];
 };
 
+export type Aggregator = (
+  stats: ArchifiltreCountStatistic[]
+) => ArchifiltreCountStatistic[];
+
 export type SiteConfig = {
   idSite: number;
   loaders: Loader[];
+  aggregators?: Aggregator[];
+};
+
+export type SumAggegatorConfig = {
+  label: string;
 };

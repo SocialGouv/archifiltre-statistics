@@ -1,3 +1,4 @@
+import { sumAgregator } from "./aggregators/sum-aggegator";
 import { eventLoader } from "./loaders/event-loader";
 import { markedToDeleteLoaders } from "./loaders/marked-to-delete-files-loader";
 import { totalFileDropLoaders } from "./loaders/total-filedrop-loader";
@@ -16,6 +17,12 @@ const ARCHIFILTRE_APP_ID = 9;
 
 export const matomoConfig: SiteConfig[] = [
   {
+    aggregators: [
+      sumAgregator({ label: "totalMarkedToDelete" }),
+      sumAgregator({ label: "carbonFootprintPaperEquivalence" }),
+      sumAgregator({ label: "totalDropVolume" }),
+      sumAgregator({ label: "carbonFootprintInKilo" }),
+    ],
     idSite: ARCHIFILTRE_APP_ID,
     loaders: [
       eventLoader({ label: "FileTreeDrop" }),

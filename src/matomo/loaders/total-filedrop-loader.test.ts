@@ -49,7 +49,7 @@ describe("total-filedrop-loader", () => {
         },
       ];
       const [{ aggregator }] = totalFileDropLoaders(apiParams);
-      const expectedValue = [{ label: "totalDropVolume", value: 11 }];
+      const expectedValue = [{ label: "totalDropVolume", value: 1 }];
 
       // WHEN
       const aggregatedValue = aggregator(apiResult);
