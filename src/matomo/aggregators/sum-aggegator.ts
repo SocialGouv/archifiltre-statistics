@@ -12,7 +12,6 @@ export const sumAgregator = (config: SumAggegatorConfig) => (
       {
         label: config.label,
         value: stats
-
           .filter(({ label }) => label === config.label)
           .map(prop("value"))
           .filter(isNumber)

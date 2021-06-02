@@ -19,7 +19,7 @@ describe("marked-to-delete-files-loader", () => {
     expect(matomoQuery).toEqual(expectedQuery);
   });
 
-  it("should return a correct matomo object", () => {
+  it("should return a valid matomo object", () => {
     const apiParams = {
       categoryName: "Element marked to delete",
       date: RELEASE_DATE_3_2,
