@@ -11,7 +11,7 @@ import type {
 } from "../matomo-types";
 
 const FOOTPRINT_COEF = 19;
-const PAPER_EQUIVALENCE_COEF = 0.22;
+const PAPER_EQUIVALENCE_COEF = 218;
 
 const markedToDeleteAggregator = () => (
   response: MatomoEventCategory[]
@@ -20,6 +20,7 @@ const markedToDeleteAggregator = () => (
   const computedMarkToDeleteVolumes = getMarkedToDeleteFileSize(
     markedToDeleteElements
   );
+
   const carbonFootprint = ceil(computedMarkToDeleteVolumes * FOOTPRINT_COEF);
   const carbonFootprintPaperEquivalence = getCarbonfootprintPaperEquivalence(
     carbonFootprint
@@ -31,7 +32,7 @@ const markedToDeleteAggregator = () => (
       value: computedMarkToDeleteVolumes,
     },
     {
-      label: "carbonFootprintInGrams",
+      label: "carbonFootprintInKilo",
       value: carbonFootprint,
     },
     {
@@ -56,11 +57,12 @@ const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
     .reduce((acc, val) => acc + val, 0);
   const giga = Math.pow(10, 9);
   const volumeToGB = ceil(sanitizedMarkedToDeleteElements / giga);
+
   return volumeToGB;
 };
 
 const getCarbonfootprintPaperEquivalence = (carbonFootprint: number): number =>
-  ceil(carbonFootprint * PAPER_EQUIVALENCE_COEF);
+  carbonFootprint * PAPER_EQUIVALENCE_COEF;
 
 export const markedToDeleteLoaders = (
   config: MatomoActionConfigObject

@@ -62,10 +62,10 @@ describe("marked-to-delete-files-loader", () => {
         label: "totalMarkedToDelete",
         value: 1,
       },
-      { label: "carbonFootprintInGrams", value: 19 },
+      { label: "carbonFootprintInKilo", value: 19 },
       {
         label: "carbonFootprintPaperEquivalence",
-        value: 5,
+        value: 4142,
       },
     ];
 

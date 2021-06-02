@@ -16,6 +16,7 @@ const totalFileDropAggregator = () => (
     .map(({ label }) => label)
     .filter((label) => label.toLowerCase().includes("total volume"));
   const computedFileDropVolumes = getTotalFileDrop(fileDropVolumes);
+
   return [
     {
       label: "totalDropVolume",
@@ -49,8 +50,9 @@ const getTotalFileDrop = (fileDropVolumes: string[]): number => {
 
   const totalMega = getTotalVolumeFromUnit(sanitizedFileDropVolumes, MEGA);
   const totalGiga = getTotalVolumeFromUnit(sanitizedFileDropVolumes, GIGA);
+  const totalTera = (totalGiga + totalMega / 1000) / 1000;
 
-  return ceil(totalGiga + totalMega / 1000);
+  return ceil(totalTera);
 };
 
 export const totalFileDropLoaders = (
