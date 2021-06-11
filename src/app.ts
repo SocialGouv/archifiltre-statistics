@@ -30,7 +30,7 @@ app.get("/healthz", (req, res) => {
 const statsCache = createCache(
   async () =>
     Promise.all([
-      getMultiSiteMatomoData(matomoConfig),
+      getMultiSiteMatomoData(matomoConfig()),
       getYoutubeData(),
       getGitHubData(),
       getTypeformData(),
