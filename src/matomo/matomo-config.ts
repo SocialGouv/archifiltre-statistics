@@ -15,7 +15,7 @@ import type { SiteConfig } from "./matomo-types";
 const ARCHIFILTRE_SITE_ID = 20;
 const ARCHIFILTRE_APP_ID = 9;
 
-export const matomoConfig: SiteConfig[] = [
+export const matomoConfig = (): SiteConfig[] => [
   {
     aggregators: [
       sumAgregator({ label: "totalMarkedToDelete" }),
