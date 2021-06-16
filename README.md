@@ -35,3 +35,10 @@ To run the linter, use the following command:
 ```
 yarn lint
 ```
+
+## Adding secrets
+
+To add secrets you need to encrypt them using the webseal utility :
+
+dev/preprod: https://socialgouv.github.io/sre-tools/?cluster=dev2&scope=cluster
+prod: https://socialgouv.github.io/sre-tools/?cluster=prod2&name=app-env&namespace=archifiltre-statistics&scope=strict
