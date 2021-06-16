@@ -9,14 +9,13 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: app
     application: archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
-    cert: wildcard
   name: app
   namespace: archifiltre-statistics
 spec:
@@ -30,18 +29,17 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: beta-db-12-dev2
-        app.gitlab.com/env.name: beta-db-12-dev2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       labels:
         app: app
         application: archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
-        cert: wildcard
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:yz42
+            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:1.2.3
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -89,15 +87,14 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   name: app-env
   namespace: archifiltre-statistics
   labels:
     application: archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
-    cert: wildcard
 spec:
   encryptedData:
     MATOMO_TOKEN: >-
@@ -114,14 +111,13 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: beta-db-12-dev2
-        app.gitlab.com/env.name: beta-db-12-dev2
+        app.gitlab.com/env: prod
+        app.gitlab.com/env.name: prod
       name: app-env
       labels:
         application: archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
-        cert: wildcard
     type: Opaque
 ---
 apiVersion: v1
@@ -133,13 +129,12 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     application: archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
-    cert: wildcard
 data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
   YOUTUBE_API_URL: https://youtube.googleapis.com/youtube/v3/
@@ -156,14 +151,13 @@ metadata:
     application: archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
-    cert: wildcard
   name: app
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   namespace: archifiltre-statistics
 spec:
   ports:
@@ -184,19 +178,18 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: prod
+    app.gitlab.com/env.name: prod
   labels:
     app: app
     application: archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
-    cert: wildcard
   name: app
   namespace: archifiltre-statistics
 spec:
   rules:
-    - host: archifiltre-statistics.dev2.fabrique.social.gouv.fr
+    - host: archifiltre-statistics.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -205,7 +198,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - archifiltre-statistics.dev2.fabrique.social.gouv.fr
+        - archifiltre-statistics.fabrique.social.gouv.fr
       secretName: app-crt
 "
 `;
