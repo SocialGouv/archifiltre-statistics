@@ -8,19 +8,19 @@ metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-f8qps:p-46tj7
-    git/branch: beta-db-12
+    git/branch: master
     git/remote: >-
       https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/archifiltre-statistics.git
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     azure-pg-admin-user: archifiltre-statistics
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
-  name: archifiltre-statistics-85-beta-db-12-dev2
+  name: archifiltre-statistics-85-master-dev42
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,16 +29,16 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: app
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
   name: app
-  namespace: archifiltre-statistics-85-beta-db-12-dev2
+  namespace: archifiltre-statistics-85-master-dev42
 spec:
   replicas: 1
   selector:
@@ -50,18 +50,18 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: beta-db-12-dev2
-        app.gitlab.com/env.name: beta-db-12-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       labels:
         app: app
-        application: xyz42-archifiltre-statistics
+        application: master-dev42-archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
         cert: wildcard
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:yz42
+            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -110,12 +110,12 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   name: app-env
-  namespace: archifiltre-statistics-85-beta-db-12-dev2
+  namespace: archifiltre-statistics-85-master-dev42
   labels:
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -136,11 +136,11 @@ spec:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: beta-db-12-dev2
-        app.gitlab.com/env.name: beta-db-12-dev2
+        app.gitlab.com/env: master-dev42
+        app.gitlab.com/env.name: master-dev42
       name: app-env
       labels:
-        application: xyz42-archifiltre-statistics
+        application: master-dev42-archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
         cert: wildcard
@@ -154,14 +154,14 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
-  namespace: archifiltre-statistics-85-beta-db-12-dev2
+  namespace: archifiltre-statistics-85-master-dev42
 data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
   YOUTUBE_API_URL: https://youtube.googleapis.com/youtube/v3/
@@ -175,7 +175,7 @@ kind: Service
 metadata:
   labels:
     app: app
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -184,9 +184,9 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
-  namespace: archifiltre-statistics-85-beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
+  namespace: archifiltre-statistics-85-master-dev42
 spec:
   ports:
     - name: http
@@ -204,19 +204,19 @@ metadata:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: beta-db-12-dev2
-    app.gitlab.com/env.name: beta-db-12-dev2
+    app.gitlab.com/env: master-dev42
+    app.gitlab.com/env.name: master-dev42
   labels:
     app: app
-    application: xyz42-archifiltre-statistics
+    application: master-dev42-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
   name: app
-  namespace: archifiltre-statistics-85-beta-db-12-dev2
+  namespace: archifiltre-statistics-85-master-dev42
 spec:
   rules:
-    - host: xyz42-archifiltre-statistics.dev2.fabrique.social.gouv.fr
+    - host: master-dev42-archifiltre-statistics.dev42.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -225,7 +225,7 @@ spec:
             path: /
   tls:
     - hosts:
-        - xyz42-archifiltre-statistics.dev2.fabrique.social.gouv.fr
+        - master-dev42-archifiltre-statistics.dev42.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
