@@ -9,6 +9,7 @@ import type {
   MatomoActionConfigObject,
   MatomoEventCategory,
 } from "../matomo-types";
+import { RELEASE_DATE_3_2 } from "./loader-utils";
 
 const FOOTPRINT_COEF = 19;
 const PAPER_EQUIVALENCE_COEF = 218;
@@ -66,8 +67,11 @@ const getCarbonfootprintPaperEquivalence = (carbonFootprint: number): number =>
 
 export const markedToDeleteLoaders = (
   config: MatomoActionConfigObject
-): Loader[] =>
-  getMatomoLastWeeksRange(new Date()).map((date) => ({
-    aggregator: markedToDeleteAggregator(),
-    query: actionQuery({ ...config, date }),
-  }));
+): Loader[] => {
+  return getMatomoLastWeeksRange(new Date(), new Date(RELEASE_DATE_3_2)).map(
+    (date) => ({
+      aggregator: markedToDeleteAggregator(),
+      query: actionQuery({ ...config, date }),
+    })
+  );
+};
