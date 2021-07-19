@@ -88,7 +88,7 @@ spec:
               cpu: 500m
               memory: 1280Mi
             requests:
-              cpu: 100m
+              cpu: 2m
               memory: 128Mi
           startupProbe:
             failureThreshold: 12
@@ -196,7 +196,7 @@ spec:
     app: app
   type: ClusterIP
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -220,9 +220,12 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: app
-              servicePort: 80
+              service:
+                name: app
+                port:
+                  name: http
             path: /
+            pathType: Prefix
   tls:
     - hosts:
         - preprod-archifiltre-statistics.dev42.fabrique.social.gouv.fr

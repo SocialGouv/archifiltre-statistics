@@ -13,7 +13,7 @@ const manifests = create("app", {
     container: {
       resources: {
         requests: {
-          cpu: "100m",
+          cpu: "2m",
           memory: "128Mi",
         },
         limits: {
