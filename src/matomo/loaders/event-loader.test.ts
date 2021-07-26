@@ -15,7 +15,7 @@ describe("event-loader", () => {
       expect(matomoQuery).toEqual(expectedValue);
     });
 
-    it("should return a valid matomo object", () => {
+    it("should return a correct matomo object", () => {
       // given
       const apiParams = { idSite: 9, label: "FileTreeDrop" };
       const apiResponse = [
