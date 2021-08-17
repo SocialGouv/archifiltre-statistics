@@ -15,6 +15,10 @@ Build:
     paths:
       - dist/
 
+Release:
+  before_script:
+    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_TITLE}.git
+
 # NOTE(julienbouquillon): use custom register job
 # By default, kosko-charts use a "/app" for default docker images names
 # TODO: discuss
