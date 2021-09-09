@@ -6,6 +6,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
+    socialgouv/creator: autodevops
     field.cattle.io/creatorId: gitlab
     field.cattle.io/projectId: c-f8qps:p-46tj7
     git/branch: v1.2.3
@@ -17,6 +18,7 @@ metadata:
   labels:
     azure-pg-admin-user: archifiltre-statistics
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -34,6 +36,7 @@ metadata:
   labels:
     app: app
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -55,6 +58,7 @@ spec:
       labels:
         app: app
         application: v1-2-3-archifiltre-statistics
+        component: v1-2-3-archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
         cert: wildcard
@@ -116,6 +120,7 @@ metadata:
   namespace: archifiltre-statistics-85-preprod-dev42
   labels:
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -141,6 +146,7 @@ spec:
       name: app-env
       labels:
         application: v1-2-3-archifiltre-statistics
+        component: v1-2-3-archifiltre-statistics
         owner: archifiltre-statistics
         team: archifiltre-statistics
         cert: wildcard
@@ -158,6 +164,7 @@ metadata:
     app.gitlab.com/env.name: preprod-dev42
   labels:
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -176,6 +183,7 @@ metadata:
   labels:
     app: app
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
@@ -209,6 +217,7 @@ metadata:
   labels:
     app: app
     application: v1-2-3-archifiltre-statistics
+    component: v1-2-3-archifiltre-statistics
     owner: archifiltre-statistics
     team: archifiltre-statistics
     cert: wildcard
