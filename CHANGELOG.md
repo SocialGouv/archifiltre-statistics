@@ -1,3 +1,10 @@
+## [1.19.12](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.11...v1.19.12) (2021-09-09)
+
+
+### Bug Fixes
+
+* **k8s:** upgrade for kube 1.2 ([#104](https://github.com/SocialGouv/archifiltre-statistics/issues/104)) ([cea680f](https://github.com/SocialGouv/archifiltre-statistics/commit/cea680fd6c0564a0541f9c318138de504fea7ef5))
+
 ## [1.19.11](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.10...v1.19.11) (2021-08-17)
 
 
