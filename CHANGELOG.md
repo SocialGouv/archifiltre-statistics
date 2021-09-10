@@ -1,3 +1,10 @@
+## [1.19.13-alpha.4](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.3...v1.19.13-alpha.4) (2021-09-10)
+
+
+### Bug Fixes
+
+* Remove tests workflow. ([30629e1](https://github.com/SocialGouv/archifiltre-statistics/commit/30629e1cfeaa45e6b63e22c31bfccd7a5991d954))
+
 ## [1.19.13-alpha.3](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.2...v1.19.13-alpha.3) (2021-09-10)
 
 
