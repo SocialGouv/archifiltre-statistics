@@ -9,7 +9,7 @@
     "start": "node dist/src/app.js",
     "k8s": "yarn --silent --cwd .k8s",
     "lint": "eslint . -c .eslintrc",
-    "test": "jest"
+    "test": "jest --ci"
   },
   "author": "Fabrique des ministère sociaux",
   "license": "Apache-2.0",
