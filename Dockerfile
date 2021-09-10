@@ -6,7 +6,10 @@ RUN chown node:node /app
 
 COPY . .
 
-RUN yarn --frozen-lockfile --production
+#RUN yarn --frozen-lockfile --production
+RUN yarn --frozen-lockfile --prefer-offline && yarn cache clean
+
+RUN yarn build
 
 USER node
 
