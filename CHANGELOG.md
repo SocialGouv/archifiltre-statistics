@@ -1,3 +1,10 @@
+## [1.19.13-alpha.3](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.2...v1.19.13-alpha.3) (2021-09-10)
+
+
+### Bug Fixes
+
+* Prevent caching-service.test.ts from hanging. ([dc0ee0e](https://github.com/SocialGouv/archifiltre-statistics/commit/dc0ee0e582ccf79c286c505a3adf4d9cd55e4a24))
+
 ## [1.19.13-alpha.2](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.1...v1.19.13-alpha.2) (2021-09-10)
 
 
