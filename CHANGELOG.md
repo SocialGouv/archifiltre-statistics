@@ -1,3 +1,10 @@
+## [1.19.13-alpha.9](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.8...v1.19.13-alpha.9) (2021-09-20)
+
+
+### Bug Fixes
+
+* Replace MATOMO_TOKEN ([e11dd5f](https://github.com/SocialGouv/archifiltre-statistics/commit/e11dd5f6dc7fca3d9afd232877013cf0601dfe57))
+
 ## [1.19.13-alpha.8](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.7...v1.19.13-alpha.8) (2021-09-20)
 
 
