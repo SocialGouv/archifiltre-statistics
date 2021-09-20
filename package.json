@@ -1,6 +1,6 @@
 {
   "name": "archifiltre-statistics",
-  "version": "1.19.13-alpha.7",
+  "version": "1.19.13-alpha.8",
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts",

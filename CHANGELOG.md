@@ -1,3 +1,10 @@
+## [1.19.13-alpha.8](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.7...v1.19.13-alpha.8) (2021-09-20)
+
+
+### Bug Fixes
+
+* Update preprod and preod sealed secrets ([9aa371c](https://github.com/SocialGouv/archifiltre-statistics/commit/9aa371c207efb36e6e919946bc4d60c1b6756202))
+
 ## [1.19.13-alpha.7](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.6...v1.19.13-alpha.7) (2021-09-20)
 
 
