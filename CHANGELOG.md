@@ -1,3 +1,10 @@
+## [1.19.13-alpha.5](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.4...v1.19.13-alpha.5) (2021-09-20)
+
+
+### Bug Fixes
+
+* Remove caching-service test ([ef24482](https://github.com/SocialGouv/archifiltre-statistics/commit/ef24482ebc3e11bcb34a315c21f7e6c79d00cff4))
+
 ## [1.19.13-alpha.4](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.3...v1.19.13-alpha.4) (2021-09-10)
 
 
