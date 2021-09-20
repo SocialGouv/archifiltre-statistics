@@ -1,3 +1,10 @@
+## [1.19.13](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.12...v1.19.13) (2021-09-20)
+
+
+### Bug Fixes
+
+* Use SocialGouv actions to deploy. ([#105](https://github.com/SocialGouv/archifiltre-statistics/issues/105)) ([38764ef](https://github.com/SocialGouv/archifiltre-statistics/commit/38764efb700a0dce55e046e3bb819f1655c69b2c))
+
 ## [1.19.13-alpha.9](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.8...v1.19.13-alpha.9) (2021-09-20)
 
 
