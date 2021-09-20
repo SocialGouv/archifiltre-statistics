@@ -1,3 +1,10 @@
+## [1.19.13-alpha.7](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.6...v1.19.13-alpha.7) (2021-09-20)
+
+
+### Bug Fixes
+
+* Rename configmaps and secrets ([9611332](https://github.com/SocialGouv/archifiltre-statistics/commit/9611332a47054c8c71774e65ed9279ab4205d0e3))
+
 ## [1.19.13-alpha.6](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.5...v1.19.13-alpha.6) (2021-09-20)
 
 
