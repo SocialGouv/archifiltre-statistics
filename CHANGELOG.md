@@ -1,3 +1,10 @@
+## [1.19.13-alpha.6](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.5...v1.19.13-alpha.6) (2021-09-20)
+
+
+### Bug Fixes
+
+* Clean code ([b15f924](https://github.com/SocialGouv/archifiltre-statistics/commit/b15f924d72a2638d4dd5c67bb7c6bcfbe48b2f15))
+
 ## [1.19.13-alpha.5](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13-alpha.4...v1.19.13-alpha.5) (2021-09-20)
 
 
