@@ -1,72 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kosko generate --dev 1`] = `
+exports[`deploy dev 2 1`] = `
 "---
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    socialgouv/creator: autodevops
-    janitor/ttl: 15d
-    field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: c-f8qps:p-46tj7
-    git/branch: master
-    git/remote: >-
-      https://gitlab-ci-token:[MASKED]@gitlab.factory.social.gouv.fr/SocialGouv/archifiltre-statistics.git
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
-  labels:
-    azure-pg-admin-user: archifiltre-statistics
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
-    cert: wildcard
-  name: archifiltre-statistics-85-master-dev42
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/standup
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    app: app
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
+    app: archifiltre-statistics
+    application: standup
+    component: standup
+    owner: standup
+    team: standup
     cert: wildcard
-  name: app
-  namespace: archifiltre-statistics-85-master-dev42
+  name: archifiltre-statistics
+  namespace: standup-mybranch
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app
+      app: archifiltre-statistics
   template:
     metadata:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/standup
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       labels:
-        app: app
-        application: master-dev42-archifiltre-statistics
-        component: master-dev42-archifiltre-statistics
-        owner: archifiltre-statistics
-        team: archifiltre-statistics
+        app: archifiltre-statistics
+        application: standup
+        component: standup
+        owner: standup
+        team: standup
         cert: wildcard
     spec:
       containers:
         - image: >-
-            harbor.fabrique.social.gouv.fr/archifiltre/archifiltre-statistics:0123456789abcdefghijklmnopqrstuvwxyz0123
+            ghcr.io/socialgouv/archifiltre/archifiltre-statistics:sha-0123456789abcdefghijklmnopqrstuvwxyz0123
           livenessProbe:
             failureThreshold: 6
             httpGet:
@@ -75,7 +56,7 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 5
             timeoutSeconds: 5
-          name: app
+          name: archifiltre-statistics
           ports:
             - containerPort: 3000
               name: http
@@ -90,10 +71,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 500m
-              memory: 1280Mi
+              cpu: 200m
+              memory: 256Mi
             requests:
-              cpu: 2m
+              cpu: 50m
               memory: 128Mi
           startupProbe:
             failureThreshold: 12
@@ -103,9 +84,12 @@ spec:
             periodSeconds: 5
           envFrom:
             - secretRef:
-                name: app-env
+                name: archifiltre-statistics-sealed-secret
             - configMapRef:
-                name: app-env
+                name: archifiltre-statistics-configmap
+          env:
+            - name: APP_BASE_URL
+              value: https://standup-mybranch.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -114,16 +98,18 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
-  name: app-env
-  namespace: archifiltre-statistics-85-master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/standup
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  name: archifiltre-statistics-sealed-secret
+  namespace: standup-mybranch
   labels:
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
+    application: standup
+    component: standup
+    owner: standup
+    team: standup
     cert: wildcard
 spec:
   encryptedData:
@@ -141,35 +127,39 @@ spec:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
-        app.gitlab.com/app: socialgouv-archifiltre-statistics
-        app.gitlab.com/env: master-dev42
-        app.gitlab.com/env.name: master-dev42
+        app.github.com/job: '5678'
+        app.github.com/ref: refs/heads/mybranch
+        app.github.com/repo: socialgouv/standup
+        app.github.com/run: '1234'
+        app.github.com/sha: '0123456'
       name: app-env
       labels:
-        application: master-dev42-archifiltre-statistics
-        component: master-dev42-archifiltre-statistics
-        owner: archifiltre-statistics
-        team: archifiltre-statistics
+        application: standup
+        component: standup
+        owner: standup
+        team: standup
         cert: wildcard
     type: Opaque
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-env
+  name: archifiltre-statistics-configmap
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/standup
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
+    application: standup
+    component: standup
+    owner: standup
+    team: standup
     cert: wildcard
-  namespace: archifiltre-statistics-85-master-dev42
+  namespace: standup-mybranch
 data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
   YOUTUBE_API_URL: https://youtube.googleapis.com/youtube/v3/
@@ -182,27 +172,29 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: app
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
+    app: archifiltre-statistics
+    application: standup
+    component: standup
+    owner: standup
+    team: standup
     cert: wildcard
-  name: app
+  name: archifiltre-statistics
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
-  namespace: archifiltre-statistics-85-master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/standup
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
+  namespace: standup-mybranch
 spec:
   ports:
     - name: http
       port: 80
       targetPort: 3000
   selector:
-    app: app
+    app: archifiltre-statistics
   type: ClusterIP
 ---
 apiVersion: networking.k8s.io/v1
@@ -212,33 +204,35 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
-    app.gitlab.com/app: socialgouv-archifiltre-statistics
-    app.gitlab.com/env: master-dev42
-    app.gitlab.com/env.name: master-dev42
+    app.github.com/job: '5678'
+    app.github.com/ref: refs/heads/mybranch
+    app.github.com/repo: socialgouv/standup
+    app.github.com/run: '1234'
+    app.github.com/sha: '0123456'
   labels:
-    app: app
-    application: master-dev42-archifiltre-statistics
-    component: master-dev42-archifiltre-statistics
-    owner: archifiltre-statistics
-    team: archifiltre-statistics
+    app: archifiltre-statistics
+    application: standup
+    component: standup
+    owner: standup
+    team: standup
     cert: wildcard
-  name: app
-  namespace: archifiltre-statistics-85-master-dev42
+  name: archifiltre-statistics
+  namespace: standup-mybranch
 spec:
   rules:
-    - host: master-dev42-archifiltre-statistics.dev42.fabrique.social.gouv.fr
+    - host: standup-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
               service:
-                name: app
+                name: archifiltre-statistics
                 port:
                   name: http
             path: /
             pathType: Prefix
   tls:
     - hosts:
-        - master-dev42-archifiltre-statistics.dev42.fabrique.social.gouv.fr
+        - standup-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;

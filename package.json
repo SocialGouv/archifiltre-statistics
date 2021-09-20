@@ -1,13 +1,12 @@
 {
   "name": "archifiltre-statistics",
-  "version": "1.19.12",
+  "version": "1.19.13-alpha.9",
   "main": "dist/app.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/app.ts",
     "build": "tsc",
     "prepare": "husky install",
     "start": "node dist/src/app.js",
-    "k8s": "yarn --silent --cwd .k8s",
     "lint": "eslint . -c .eslintrc",
     "test": "jest"
   },
@@ -25,16 +24,21 @@
     "ts-jest": "^26.5.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
     "@socialgouv/eslint-config-typescript": "^1.70.0",
+    "@socialgouv/kosko-charts": "^9.5.11",
     "@types/cors": "^2.8.10",
     "@types/date-fns": "^2.6.0",
     "@types/express": "^4.17.12",
     "@types/lodash": "^4.14.170",
+    "babel-jest": "^27.2.0",
     "eslint": "^7.24.0",
     "husky": "^6.0.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.9",
     "prettier": "^2.2.1",
+    "tempy": "1.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
