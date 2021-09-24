@@ -1,0 +1,6 @@
+{
+  "name": "archifiltre-statistics",
+  "type": "app",
+  "registry": "ghcr",
+  "project": "archifiltre"
+}

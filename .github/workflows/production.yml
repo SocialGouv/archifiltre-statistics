@@ -1,0 +1,33 @@
+name: Production
+
+on:
+  push:
+    tags:
+      - v*
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+jobs:
+
+  deploy:
+    name: Deploy production
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://archifiltre-statistics.fabrique.social.gouv.fr/
+    steps:
+
+    - name: Get project name
+      run: |
+        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+
+    - name: Use autodevops to deploy production
+      uses: SocialGouv/actions/autodevops@master
+      with:
+        environment: prod
+        project: ${{ env.project }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        imageName: archifiltre/${{ env.project }}
+        kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_PROD }}

@@ -1,4 +1,5 @@
 import {
+  addDays,
   differenceInWeeks,
   endOfWeek,
   formatISO,
@@ -6,8 +7,6 @@ import {
   subWeeks,
 } from "date-fns";
 import { range } from "lodash";
-
-import { RELEASE_DATE_3_2 } from "../matomo/loaders/loader-utils";
 
 export const getLastWeeksRanges = (weekCount: number) => (
   now: Date
@@ -26,6 +25,25 @@ export const getLastWeeksRanges = (weekCount: number) => (
         ]
     );
 
-export const getMatomoLastWeeksRange = getLastWeeksRanges(
-  differenceInWeeks(Date.now(), new Date(RELEASE_DATE_3_2))
-);
+export const getLastRangesChunks = (chunkSize: number) => (
+  chunksCount: number
+) => (startDate: Date): [string, string][] =>
+  range(chunksCount)
+    .map((index) => addDays(startDate, index * chunkSize))
+    .map((date) => [date, addDays(date, chunkSize - 1)])
+    .map(
+      (dateRange) =>
+        dateRange.map((date) =>
+          formatISO(date, { representation: "date" })
+        ) as [string, string]
+    );
+
+const DAYS_IN_WEEK = 7;
+
+const getLastWeeksChunks = getLastRangesChunks(DAYS_IN_WEEK);
+
+export const getMatomoLastWeeksRange = (
+  now: Date,
+  baseDate: Date
+): [string, string][] =>
+  getLastWeeksChunks(differenceInWeeks(now, baseDate) + 1)(baseDate);
