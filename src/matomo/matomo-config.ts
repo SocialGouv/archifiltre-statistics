@@ -1,7 +1,7 @@
-import { sumAgregator } from "./aggregators/sum-aggegator";
 import { eventLoader } from "./loaders/event-loader";
-import { markedToDeleteLoaders } from "./loaders/marked-to-delete-files-loader";
-import { totalFileDropLoaders } from "./loaders/total-filedrop-loader";
+// import { markedToDeleteLoaders } from "./loaders/marked-to-delete-files-loader";
+// import { sumAgregator } from "./aggregators/sum-aggegator";
+// import { totalFileDropLoaders } from "./loaders/total-filedrop-loader";
 import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors-loader";
 import { totalMonthlyDownloadLoader } from "./loaders/total-monthly-download-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
@@ -18,10 +18,10 @@ const ARCHIFILTRE_APP_ID = 9;
 export const matomoConfig = (): SiteConfig[] => [
   {
     aggregators: [
-      sumAgregator({ label: "totalMarkedToDelete" }),
-      sumAgregator({ label: "carbonFootprintPaperEquivalence" }),
-      sumAgregator({ label: "totalDropVolume" }),
-      sumAgregator({ label: "carbonFootprintInKilo" }),
+      // sumAgregator({ label: "totalMarkedToDelete" }),
+      // sumAgregator({ label: "carbonFootprintPaperEquivalence" }),
+      // sumAgregator({ label: "totalDropVolume" }),
+      // sumAgregator({ label: "carbonFootprintInKilo" }),
     ],
     idSite: ARCHIFILTRE_APP_ID,
     loaders: [
@@ -33,8 +33,8 @@ export const matomoConfig = (): SiteConfig[] => [
       eventLoader({ label: "Excel Export" }),
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
-      ...totalFileDropLoaders({ categoryName: "FileTreeDrop" }),
-      ...markedToDeleteLoaders({ categoryName: "Element marked to delete" }),
+      // ...totalFileDropLoaders({ categoryName: "FileTreeDrop" }),
+      // ...markedToDeleteLoaders({ categoryName: "Element marked to delete" }),
       visitorCountriesLoader(),
       totalMonthVisitorsLoader(),
       averageMonthlyVisitorsLoader(),
