@@ -26,7 +26,7 @@ const totalFileDropAggregator = () => (
   ];
 };
 
-const getTotalFileDrop = (fileDropVolumes: string[]): number => {
+export const getTotalFileDrop = (fileDropVolumes: string[]): number => {
   const GIGA = "go";
   const MEGA = "mo";
 

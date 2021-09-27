@@ -8,6 +8,10 @@ import { cacheTTL, corsOrigins, port } from "./config";
 import { getGitHubData } from "./github/github-service";
 import { matomoConfig } from "./matomo/matomo-config";
 import { getMultiSiteMatomoData } from "./matomo/matomo-service";
+import {
+  matomoFileTreeDropFix,
+  matomoMarkedToDeleteFix,
+} from "./matomo-fix/matomo-fix-service";
 import { getTypeformData } from "./typeform/typeform-service";
 import { getYoutubeData } from "./youtube/youtube-service";
 
@@ -35,12 +39,25 @@ const statsCache = createCache(
       getGitHubData(),
       getTypeformData(),
     ]).then(flatten),
+
   cacheTTL
 );
+
 app.get("/statistics", (req, res) => {
   res.json({
     lastFetchTimestamp: statsCache.getLastFetchTimestamp(),
     result: statsCache.read(),
+  });
+});
+
+const statsCacheFixed = createCache(
+  async () => Promise.all([matomoFileTreeDropFix(), matomoMarkedToDeleteFix()]),
+  cacheTTL
+);
+
+app.get("/statistics-fix", (req, res) => {
+  res.json({
+    result: statsCacheFixed.read()?.flat(),
   });
 });
 
