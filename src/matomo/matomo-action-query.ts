@@ -55,6 +55,7 @@ export const actionQuery = (config: MatomoActionQueryConfig) => async ({
     label: config.categoryName,
     method: "Events.getCategory",
   };
+
   const {
     data: [{ idsubdatatable }],
   }: GetCategoryResponse = await requestMatomo(params);

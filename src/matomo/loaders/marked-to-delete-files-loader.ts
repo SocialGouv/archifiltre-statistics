@@ -43,7 +43,9 @@ const markedToDeleteAggregator = () => (
   ];
 };
 
-const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
+export const getMarkedToDeleteFileSize = (
+  markedToDeleteElements: string[]
+): number => {
   const sanitizedMarkedToDeleteElements = markedToDeleteElements
     .filter((filteredLabel) =>
       filteredLabel.toLowerCase().includes("volume to delete")
@@ -62,8 +64,9 @@ const getMarkedToDeleteFileSize = (markedToDeleteElements: string[]) => {
   return volumeToGB;
 };
 
-const getCarbonfootprintPaperEquivalence = (carbonFootprint: number): number =>
-  carbonFootprint * PAPER_EQUIVALENCE_COEF;
+export const getCarbonfootprintPaperEquivalence = (
+  carbonFootprint: number
+): number => carbonFootprint * PAPER_EQUIVALENCE_COEF;
 
 export const markedToDeleteLoaders = (
   config: MatomoActionConfigObject

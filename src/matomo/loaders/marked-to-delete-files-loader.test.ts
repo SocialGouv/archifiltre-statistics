@@ -6,7 +6,7 @@ import { markedToDeleteLoaders } from "./marked-to-delete-files-loader";
 describe("marked-to-delete-files-loader", () => {
   it("should return a valid matomo query", () => {
     const expectedQuery =
-      "date=2021-04-14&idSite=9&period=range&filter_limit=-1&idSubtable=9&method=Events.getActionFromCategoryId";
+      "date=2021-04-13&idSite=9&period=range&filter_limit=-1&idSubtable=9&method=Events.getActionFromCategoryId";
     const apiParams = {
       config: {
         categoryId: 9,

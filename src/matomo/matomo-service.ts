@@ -48,7 +48,7 @@ export const requestMatomo = async (
     })
   );
 
-const makeBulkRequest = async (
+export const makeBulkRequest = async (
   params: Record<string, string>
 ): Promise<BulkRequestData> =>
   requestMatomo({
@@ -56,8 +56,9 @@ const makeBulkRequest = async (
     ...params,
   });
 
-const formatResult = ({ data }: BulkRequestData): MatomoEventCategory[][] =>
-  data;
+export const formatResult = ({
+  data,
+}: BulkRequestData): MatomoEventCategory[][] => data;
 
 const getBulkMatomoData = compose(
   liftPromise(formatResult),
