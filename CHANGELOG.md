@@ -1,3 +1,10 @@
+## [1.19.14](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.13...v1.19.14) (2021-09-28)
+
+
+### Bug Fixes
+
+* statistics ([#107](https://github.com/SocialGouv/archifiltre-statistics/issues/107)) ([37913d5](https://github.com/SocialGouv/archifiltre-statistics/commit/37913d5954283e2a9f68c91afd7cd247be2f1034))
+
 ## [1.19.13](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.12...v1.19.13) (2021-09-20)
 
 
