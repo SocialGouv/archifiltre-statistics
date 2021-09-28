@@ -23,7 +23,7 @@ type GetCategoryResponse = {
 
 const getDate = (date: string | [string, string]) =>
   isString(date) ? `${date},today` : date.join(",");
-const dates = getMatomoLastWeeksRange(new Date(), new Date("2021-03-25"));
+const dates = getMatomoLastWeeksRange(new Date(), new Date("2021-04-15"));
 
 const getParams = (
   date: string | [string, string],
@@ -44,7 +44,7 @@ export const getQuery = async (
   const {
     data: [{ idsubdatatable }],
   }: GetCategoryResponse = await requestMatomo(getParams(date, config));
-  const query = createMatomoEventActionMethod({
+  return createMatomoEventActionMethod({
     config: {
       categoryId: idsubdatatable,
       date: getDate(date),
@@ -53,10 +53,8 @@ export const getQuery = async (
     },
     idSite: 9,
   });
-  return query;
 };
 
-// file tree drop
 export const matomoFileTreeDropFix = async () => {
   const fileTreeDropConfig: MatomoActionQueryConfig = {
     categoryName: "FileTreeDrop",

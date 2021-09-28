@@ -1,7 +1,4 @@
 import { eventLoader } from "./loaders/event-loader";
-// import { markedToDeleteLoaders } from "./loaders/marked-to-delete-files-loader";
-// import { sumAgregator } from "./aggregators/sum-aggegator";
-// import { totalFileDropLoaders } from "./loaders/total-filedrop-loader";
 import { totalMonthVisitorsLoader } from "./loaders/total-month-visitors-loader";
 import { totalMonthlyDownloadLoader } from "./loaders/total-monthly-download-loader";
 import { visitorCountriesLoader } from "./loaders/visitor-countries-loader";
@@ -33,11 +30,11 @@ export const matomoConfig = (): SiteConfig[] => [
       eventLoader({ label: "Excel Export" }),
       eventLoader({ label: "RESIP Export" }),
       eventLoader({ label: "Audit report export" }),
-      // ...totalFileDropLoaders({ categoryName: "FileTreeDrop" }),
-      // ...markedToDeleteLoaders({ categoryName: "Element marked to delete" }),
       visitorCountriesLoader(),
       totalMonthVisitorsLoader(),
       averageMonthlyVisitorsLoader(),
+      // ...totalFileDropLoaders({ categoryName: "FileTreeDrop" }),
+      // ...markedToDeleteLoaders({ categoryName: "Element marked to delete" }),
     ],
   },
   {

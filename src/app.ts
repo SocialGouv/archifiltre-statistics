@@ -57,6 +57,7 @@ const statsCacheFixed = createCache(
 
 app.get("/statistics-fix", (req, res) => {
   res.json({
+    lastFetchTimestamp: statsCacheFixed.getLastFetchTimestamp(),
     result: statsCacheFixed.read()?.flat(),
   });
 });

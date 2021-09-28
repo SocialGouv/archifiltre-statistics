@@ -10,7 +10,7 @@ import type {
 } from "../matomo-types";
 
 export const DEFAULT_START_DATE = "2020-01-01";
-export const RELEASE_DATE_3_2 = "2021-06-15";
+export const RELEASE_DATE_3_2 = "2021-04-13";
 export const TOTAL_MONTH_VISITORS_DATE_RANGE: [string, string] = [
   "2019-11-01",
   "today",
