@@ -21,9 +21,12 @@ type GetCategoryResponse = {
   }[];
 };
 
+const ARBITRARY_DATE = "2021-04-15";
+const FOOTPRINT_COEF = 19;
+
 const getDate = (date: string | [string, string]) =>
   isString(date) ? `${date},today` : date.join(",");
-const dates = getMatomoLastWeeksRange(new Date(), new Date("2021-04-15"));
+const dates = getMatomoLastWeeksRange(new Date(), new Date(ARBITRARY_DATE));
 
 const getParams = (
   date: string | [string, string],
@@ -96,7 +99,7 @@ export const matomoMarkedToDeleteFix = async () => {
   const markedToDeleteVolume = getMarkedToDeleteFileSize(
     markedToDeleteSanitized
   );
-  const carbonFootprint = ceil(markedToDeleteVolume * 19);
+  const carbonFootprint = ceil(markedToDeleteVolume * FOOTPRINT_COEF);
   const carbonFootprintPaperEquivalence = getCarbonfootprintPaperEquivalence(
     carbonFootprint
   );
