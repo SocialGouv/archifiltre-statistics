@@ -1,3 +1,10 @@
+## [1.19.16](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.15...v1.19.16) (2021-10-01)
+
+
+### Bug Fixes
+
+* **matomo:** change cache ttl ([#110](https://github.com/SocialGouv/archifiltre-statistics/issues/110)) ([481be4a](https://github.com/SocialGouv/archifiltre-statistics/commit/481be4a5081f51d368bbffc6b35b6cb999c55729))
+
 ## [1.19.15](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.14...v1.19.15) (2021-10-01)
 
 
