@@ -1,3 +1,10 @@
+## [1.19.17](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.16...v1.19.17) (2021-11-17)
+
+
+### Bug Fixes
+
+* **readme:** fix typo in secrets urls ([#87](https://github.com/SocialGouv/archifiltre-statistics/issues/87)) ([3ed6833](https://github.com/SocialGouv/archifiltre-statistics/commit/3ed6833e2036bd450b2663609d6efc2b4945a905))
+
 ## [1.19.16](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.15...v1.19.16) (2021-10-01)
 
 
