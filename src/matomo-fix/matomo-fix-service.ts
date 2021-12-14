@@ -100,6 +100,7 @@ export const matomoMarkedToDeleteFix = async () => {
     markedToDeleteSanitized
   );
   const carbonFootprint = ceil(markedToDeleteVolume * FOOTPRINT_COEF);
+
   const carbonFootprintPaperEquivalence = getCarbonfootprintPaperEquivalence(
     carbonFootprint
   );
