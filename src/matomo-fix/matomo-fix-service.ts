@@ -21,12 +21,23 @@ type GetCategoryResponse = {
   }[];
 };
 
-const ARBITRARY_DATE = "2021-04-15";
+const COMPUTED_VALUE_FROM_MATOMO = 383;
+const ELEMENT_TO_DELETE_ARBITRARY_DATE = "2021-04-14";
+const FILE_TREE_DROP_ARBITRARY_DATE = "2021-12-13";
+
 const FOOTPRINT_COEF = 19;
 
 const getDate = (date: string | [string, string]) =>
   isString(date) ? `${date},today` : date.join(",");
-const dates = getMatomoLastWeeksRange(new Date(), new Date(ARBITRARY_DATE));
+
+const markedToDeletaDates = getMatomoLastWeeksRange(
+  new Date(),
+  new Date(ELEMENT_TO_DELETE_ARBITRARY_DATE)
+);
+const fileTreeDropDates = getMatomoLastWeeksRange(
+  new Date(),
+  new Date(FILE_TREE_DROP_ARBITRARY_DATE)
+);
 
 const getParams = (
   date: string | [string, string],
@@ -63,20 +74,28 @@ export const matomoFileTreeDropFix = async () => {
     categoryName: "FileTreeDrop",
   };
 
-  const queries = dates.map(async (date) => getQuery(date, fileTreeDropConfig));
+  const queries = fileTreeDropDates.map(async (date) =>
+    getQuery(date, fileTreeDropConfig)
+  );
   const promisedQueries = await Promise.all(queries);
   const convertedQueries = convertQueriesToMatomoQueryObject(promisedQueries);
 
   const fileDropVolumeResponse = await makeBulkRequest(convertedQueries);
+
   const fileDropVolumeSanitized = fileDropVolumeResponse.data
     .flat()
     .map(({ label }) => label)
     .filter((label) => label.toLowerCase().includes("total volume"));
+
+  const lastComputedValue = COMPUTED_VALUE_FROM_MATOMO; // TODO: Number comes from a passed and selected range. Should be aggregated in a db.
+
   const fileDropVolumeTotal = getTotalFileDrop(fileDropVolumeSanitized);
+
+  const computedFileDropVolumeTotal = lastComputedValue + fileDropVolumeTotal;
 
   return {
     label: "totalDropVolume",
-    value: fileDropVolumeTotal,
+    value: computedFileDropVolumeTotal,
   };
 };
 
@@ -85,7 +104,7 @@ export const matomoMarkedToDeleteFix = async () => {
     categoryName: "Element marked to delete",
   };
 
-  const queries = dates.map(async (date) =>
+  const queries = markedToDeletaDates.map(async (date) =>
     getQuery(date, markedToDeleteConfig)
   );
   const promisedQueries = await Promise.all(queries);
