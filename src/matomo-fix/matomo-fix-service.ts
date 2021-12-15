@@ -108,6 +108,7 @@ export const matomoMarkedToDeleteFix = async () => {
     getQuery(date, markedToDeleteConfig)
   );
   const promisedQueries = await Promise.all(queries);
+
   const convertedQueries = convertQueriesToMatomoQueryObject(promisedQueries);
 
   const markedToDeleteResponse = await makeBulkRequest(convertedQueries);
