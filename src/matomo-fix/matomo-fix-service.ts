@@ -92,6 +92,7 @@ export const matomoFileTreeDropFix = async () => {
   const fileDropVolumeTotal = getTotalFileDrop(fileDropVolumeSanitized);
 
   const computedFileDropVolumeTotal = lastComputedValue + fileDropVolumeTotal;
+  console.log(promisedQueries);
 
   return {
     label: "totalDropVolume",
