@@ -10,18 +10,18 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/standup
+    app.github.com/repo: socialgouv/archifiltre-statistics
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
     app: archifiltre-statistics
-    application: standup
-    component: standup
-    owner: standup
-    team: standup
+    application: archifiltre-statistics
+    component: archifiltre-statistics
+    owner: archifiltre-statistics
+    team: archifiltre-statistics
     cert: wildcard
   name: archifiltre-statistics
-  namespace: standup-mybranch
+  namespace: archifiltre-statistics-mybranch
 spec:
   replicas: 1
   selector:
@@ -34,15 +34,15 @@ spec:
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.github.com/job: '5678'
         app.github.com/ref: refs/heads/mybranch
-        app.github.com/repo: socialgouv/standup
+        app.github.com/repo: socialgouv/archifiltre-statistics
         app.github.com/run: '1234'
         app.github.com/sha: '0123456'
       labels:
         app: archifiltre-statistics
-        application: standup
-        component: standup
-        owner: standup
-        team: standup
+        application: archifiltre-statistics
+        component: archifiltre-statistics
+        owner: archifiltre-statistics
+        team: archifiltre-statistics
         cert: wildcard
     spec:
       containers:
@@ -89,7 +89,8 @@ spec:
                 name: archifiltre-statistics-configmap
           env:
             - name: APP_BASE_URL
-              value: https://standup-mybranch.dev2.fabrique.social.gouv.fr
+              value: >-
+                https://archifiltre-statistics-mybranch.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -100,16 +101,16 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/standup
+    app.github.com/repo: socialgouv/archifiltre-statistics
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   name: archifiltre-statistics-sealed-secret
-  namespace: standup-mybranch
+  namespace: archifiltre-statistics-mybranch
   labels:
-    application: standup
-    component: standup
-    owner: standup
-    team: standup
+    application: archifiltre-statistics
+    component: archifiltre-statistics
+    owner: archifiltre-statistics
+    team: archifiltre-statistics
     cert: wildcard
 spec:
   encryptedData:
@@ -129,15 +130,15 @@ spec:
         kapp.k14s.io/disable-default-label-scoping-rules: ''
         app.github.com/job: '5678'
         app.github.com/ref: refs/heads/mybranch
-        app.github.com/repo: socialgouv/standup
+        app.github.com/repo: socialgouv/archifiltre-statistics
         app.github.com/run: '1234'
         app.github.com/sha: '0123456'
-      name: app-env
+      name: archifiltre-statistics-sealed-secret
       labels:
-        application: standup
-        component: standup
-        owner: standup
-        team: standup
+        application: archifiltre-statistics
+        component: archifiltre-statistics
+        owner: archifiltre-statistics
+        team: archifiltre-statistics
         cert: wildcard
     type: Opaque
 ---
@@ -150,16 +151,16 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/standup
+    app.github.com/repo: socialgouv/archifiltre-statistics
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
-    application: standup
-    component: standup
-    owner: standup
-    team: standup
+    application: archifiltre-statistics
+    component: archifiltre-statistics
+    owner: archifiltre-statistics
+    team: archifiltre-statistics
     cert: wildcard
-  namespace: standup-mybranch
+  namespace: archifiltre-statistics-mybranch
 data:
   MATOMO_URL: https://matomo.fabrique.social.gouv.fr/
   YOUTUBE_API_URL: https://youtube.googleapis.com/youtube/v3/
@@ -173,10 +174,10 @@ kind: Service
 metadata:
   labels:
     app: archifiltre-statistics
-    application: standup
-    component: standup
-    owner: standup
-    team: standup
+    application: archifiltre-statistics
+    component: archifiltre-statistics
+    owner: archifiltre-statistics
+    team: archifiltre-statistics
     cert: wildcard
   name: archifiltre-statistics
   annotations:
@@ -184,10 +185,10 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/standup
+    app.github.com/repo: socialgouv/archifiltre-statistics
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
-  namespace: standup-mybranch
+  namespace: archifiltre-statistics-mybranch
 spec:
   ports:
     - name: http
@@ -206,21 +207,21 @@ metadata:
     kapp.k14s.io/disable-default-label-scoping-rules: ''
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
-    app.github.com/repo: socialgouv/standup
+    app.github.com/repo: socialgouv/archifiltre-statistics
     app.github.com/run: '1234'
     app.github.com/sha: '0123456'
   labels:
     app: archifiltre-statistics
-    application: standup
-    component: standup
-    owner: standup
-    team: standup
+    application: archifiltre-statistics
+    component: archifiltre-statistics
+    owner: archifiltre-statistics
+    team: archifiltre-statistics
     cert: wildcard
   name: archifiltre-statistics
-  namespace: standup-mybranch
+  namespace: archifiltre-statistics-mybranch
 spec:
   rules:
-    - host: standup-mybranch.dev2.fabrique.social.gouv.fr
+    - host: archifiltre-statistics-mybranch.dev2.fabrique.social.gouv.fr
       http:
         paths:
           - backend:
@@ -232,7 +233,7 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - standup-mybranch.dev2.fabrique.social.gouv.fr
+        - archifiltre-statistics-mybranch.dev2.fabrique.social.gouv.fr
       secretName: wildcard-crt
 "
 `;
