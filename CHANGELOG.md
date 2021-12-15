@@ -1,3 +1,10 @@
+## [1.19.20](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.19...v1.19.20) (2021-12-15)
+
+
+### Bug Fixes
+
+* **matomo:** stats ([#121](https://github.com/SocialGouv/archifiltre-statistics/issues/121)) ([8e6ab38](https://github.com/SocialGouv/archifiltre-statistics/commit/8e6ab38369a563f7a169f5b4b19a9c0ff2a5e624))
+
 ## [1.19.19](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.18...v1.19.19) (2021-12-15)
 
 
