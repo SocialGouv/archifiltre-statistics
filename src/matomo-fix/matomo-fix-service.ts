@@ -22,8 +22,8 @@ type GetCategoryResponse = {
 };
 
 const COMPUTED_VALUE_FROM_MATOMO = 383;
-const ELEMENT_TO_DELETE_ARBITRARY_DATE = "2021-04-14";
-const FILE_TREE_DROP_ARBITRARY_DATE = "2021-12-13";
+const ELEMENT_TO_DELETE_ARBITRARY_DATE = "2021-04-15";
+const FILE_TREE_DROP_ARBITRARY_DATE = "2021-11-12";
 
 const FOOTPRINT_COEF = 19;
 
@@ -55,12 +55,15 @@ export const getQuery = async (
   date: string | [string, string],
   config: MatomoActionQueryConfig
 ): Promise<string> => {
-  const {
-    data: [{ idsubdatatable }],
-  }: GetCategoryResponse = await requestMatomo(getParams(date, config));
+  const { data }: GetCategoryResponse = await requestMatomo(
+    getParams(date, config)
+  );
+
+  const id = data.length ? data[0].idsubdatatable : 1;
+
   return createMatomoEventActionMethod({
     config: {
-      categoryId: idsubdatatable,
+      categoryId: id,
       date: getDate(date),
       // eslint-disable-next-line @typescript-eslint/naming-convention
       filter_limit: -1,
