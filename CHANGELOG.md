@@ -1,3 +1,10 @@
+## [1.19.22](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.21...v1.19.22) (2022-02-04)
+
+
+### Bug Fixes
+
+* release ([70eb9a0](https://github.com/SocialGouv/archifiltre-statistics/commit/70eb9a02ef44292dfa92fea3b02f66720f8182d1))
+
 ## [1.19.21](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.20...v1.19.21) (2022-01-04)
 
 
