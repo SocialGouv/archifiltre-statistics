@@ -8,6 +8,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/delete-strategy: orphan
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/archifiltre-statistics
@@ -32,6 +33,7 @@ spec:
       annotations:
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
+        kapp.k14s.io/delete-strategy: orphan
         app.github.com/job: '5678'
         app.github.com/ref: refs/heads/mybranch
         app.github.com/repo: socialgouv/archifiltre-statistics
@@ -91,6 +93,9 @@ spec:
             - name: APP_BASE_URL
               value: >-
                 https://archifiltre-statistics-mybranch.dev2.fabrique.social.gouv.fr
+            - name: NEXTAUTH_URL
+              value: >-
+                https://archifiltre-statistics-mybranch.dev2.fabrique.social.gouv.fr
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -99,6 +104,7 @@ metadata:
     sealedsecrets.bitnami.com/cluster-wide: 'true'
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/delete-strategy: orphan
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/archifiltre-statistics
@@ -128,6 +134,7 @@ spec:
         sealedsecrets.bitnami.com/cluster-wide: 'true'
         kapp.k14s.io/disable-default-ownership-label-rules: ''
         kapp.k14s.io/disable-default-label-scoping-rules: ''
+        kapp.k14s.io/delete-strategy: orphan
         app.github.com/job: '5678'
         app.github.com/ref: refs/heads/mybranch
         app.github.com/repo: socialgouv/archifiltre-statistics
@@ -149,6 +156,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/delete-strategy: orphan
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/archifiltre-statistics
@@ -183,6 +191,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/delete-strategy: orphan
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/archifiltre-statistics
@@ -205,6 +214,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kapp.k14s.io/disable-default-ownership-label-rules: ''
     kapp.k14s.io/disable-default-label-scoping-rules: ''
+    kapp.k14s.io/delete-strategy: orphan
     app.github.com/job: '5678'
     app.github.com/ref: refs/heads/mybranch
     app.github.com/repo: socialgouv/archifiltre-statistics
