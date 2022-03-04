@@ -1,3 +1,10 @@
+## [1.19.23](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.22...v1.19.23) (2022-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.2 [security] ([#122](https://github.com/SocialGouv/archifiltre-statistics/issues/122)) ([8753011](https://github.com/SocialGouv/archifiltre-statistics/commit/87530110af6c06442fcbc264329afaa42e58c5c2))
+
 ## [1.19.22](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.21...v1.19.22) (2022-02-04)
 
 
