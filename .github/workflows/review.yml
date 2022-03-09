@@ -17,16 +17,11 @@ jobs:
     name: Deploy review branch
     runs-on: ubuntu-latest
     steps:
-
-    - name: Get project name
-      run: |
-        echo "project=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
-
     - name: Use autodevops to deploy review branch
-      uses: SocialGouv/actions/autodevops@master
+      uses: SocialGouv/actions/autodevops-helm@v1
       with:
         environment: dev
-        project: ${{ env.project }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        imageName: archifiltre/${{ env.project }}
+        imageName: archifiltre/archifiltre-statistics
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV }}

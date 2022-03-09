@@ -1,0 +1,6 @@
+app:
+  envFrom:
+    - secretRef:
+        name: archifiltre-statistics-sealed-secret
+    - configMapRef:
+        name: archifiltre-statistics-configmap
