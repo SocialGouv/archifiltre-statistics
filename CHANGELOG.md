@@ -1,3 +1,10 @@
+## [1.19.26](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.25...v1.19.26) (2022-03-09)
+
+
+### Bug Fixes
+
+* **secrets:** upgrade invalid prod seal ([#131](https://github.com/SocialGouv/archifiltre-statistics/issues/131)) ([62d568e](https://github.com/SocialGouv/archifiltre-statistics/commit/62d568e9234f150dbf73d26f3f42481b8eccc048))
+
 ## [1.19.25](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.24...v1.19.25) (2022-03-09)
 
 
