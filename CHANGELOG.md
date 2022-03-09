@@ -1,3 +1,10 @@
+## [1.19.25](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.24...v1.19.25) (2022-03-09)
+
+
+### Bug Fixes
+
+* **ci:** helm-deploy ([#130](https://github.com/SocialGouv/archifiltre-statistics/issues/130)) ([6c6f241](https://github.com/SocialGouv/archifiltre-statistics/commit/6c6f2415e76dd670127b6ce9e2ae27db46ce3fda))
+
 ## [1.19.24](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.23...v1.19.24) (2022-03-09)
 
 
