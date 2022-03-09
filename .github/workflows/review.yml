@@ -23,6 +23,6 @@ jobs:
         environment: dev
         token: ${{ secrets.GITHUB_TOKEN }}
         imageName: archifiltre/archifiltre-statistics
-        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV }}
+        rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         socialgouvBaseDomain: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
