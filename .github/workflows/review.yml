@@ -25,3 +25,4 @@ jobs:
         imageName: archifiltre/archifiltre-statistics
         rancherId: ${{ secrets.RANCHER_PROJECT_ID }}
         kubeconfig: ${{ secrets.SOCIALGOUV_KUBE_CONFIG_DEV }}
+        socialgouvBaseDomain: ${{ secrets.SOCIALGOUV_BASE_DOMAIN }}
