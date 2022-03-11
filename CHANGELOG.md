@@ -1,3 +1,10 @@
+## [1.19.27](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.26...v1.19.27) (2022-03-11)
+
+
+### Bug Fixes
+
+* **deps:** update jest monorepo to v27 ([#89](https://github.com/SocialGouv/archifiltre-statistics/issues/89)) ([80dbea8](https://github.com/SocialGouv/archifiltre-statistics/commit/80dbea8a56476c786bb6e3dca72b86967f55153d))
+
 ## [1.19.26](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.25...v1.19.26) (2022-03-09)
 
 
