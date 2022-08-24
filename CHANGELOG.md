@@ -1,3 +1,38 @@
+## [1.19.27](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.26...v1.19.27) (2022-03-11)
+
+
+### Bug Fixes
+
+* **deps:** update jest monorepo to v27 ([#89](https://github.com/SocialGouv/archifiltre-statistics/issues/89)) ([80dbea8](https://github.com/SocialGouv/archifiltre-statistics/commit/80dbea8a56476c786bb6e3dca72b86967f55153d))
+
+## [1.19.26](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.25...v1.19.26) (2022-03-09)
+
+
+### Bug Fixes
+
+* **secrets:** upgrade invalid prod seal ([#131](https://github.com/SocialGouv/archifiltre-statistics/issues/131)) ([62d568e](https://github.com/SocialGouv/archifiltre-statistics/commit/62d568e9234f150dbf73d26f3f42481b8eccc048))
+
+## [1.19.25](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.24...v1.19.25) (2022-03-09)
+
+
+### Bug Fixes
+
+* **ci:** helm-deploy ([#130](https://github.com/SocialGouv/archifiltre-statistics/issues/130)) ([6c6f241](https://github.com/SocialGouv/archifiltre-statistics/commit/6c6f2415e76dd670127b6ce9e2ae27db46ce3fda))
+
+## [1.19.24](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.23...v1.19.24) (2022-03-09)
+
+
+### Bug Fixes
+
+* **ci:** helm-deploy ([#129](https://github.com/SocialGouv/archifiltre-statistics/issues/129)) ([4914249](https://github.com/SocialGouv/archifiltre-statistics/commit/49142491ac11301a3d99c963a92d50d734f8cf7b))
+
+## [1.19.23](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.22...v1.19.23) (2022-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.2 [security] ([#122](https://github.com/SocialGouv/archifiltre-statistics/issues/122)) ([8753011](https://github.com/SocialGouv/archifiltre-statistics/commit/87530110af6c06442fcbc264329afaa42e58c5c2))
+
 ## [1.19.22](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.21...v1.19.22) (2022-02-04)
 
 

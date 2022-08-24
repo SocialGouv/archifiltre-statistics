@@ -1,0 +1,12 @@
+app:
+  probesPath: /healthz
+  env:
+    - name: APP_BASE_URL
+      value: https://{{ .Values.global.host }}
+    - name: NEXTAUTH_URL
+      value: https://{{ .Values.global.host }}
+  envFrom:
+    - secretRef:
+        name: archifiltre-statistics-sealed-secret
+    - configMapRef:
+        name: archifiltre-statistics-configmap
