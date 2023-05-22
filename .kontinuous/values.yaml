@@ -1,4 +1,5 @@
 app:
+  containerPort: 3000
   probesPath: /healthz
   env:
     - name: APP_BASE_URL
