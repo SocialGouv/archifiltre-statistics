@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.28...v1.20.0) (2023-05-22)
+
+
+### Features
+
+* ci on kontinuous ([#143](https://github.com/SocialGouv/archifiltre-statistics/issues/143)) ([be5543e](https://github.com/SocialGouv/archifiltre-statistics/commit/be5543eab604d050e2dc3bbb96da0b607f84d36f))
+
 ## [1.19.28](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.19.27...v1.19.28) (2022-08-24)
 
 
