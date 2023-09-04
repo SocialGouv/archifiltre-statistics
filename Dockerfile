@@ -1,18 +1,18 @@
-FROM node:15-alpine
-
+FROM node:15-alpine AS node
+USER 1000
 WORKDIR /app
 
-RUN chown node:node /app
+FROM node AS builder
+
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+RUN yarn fetch --immutable && yarn cache clean
 
 COPY . .
-
-#RUN yarn --frozen-lockfile --production
-RUN yarn --frozen-lockfile --prefer-offline && yarn cache clean
-
 RUN yarn build
+RUN yarn workspaces focus --production
 
-USER node
-
+FROM node AS runner
 ENV NODE_ENV=production
-
 ENTRYPOINT ["yarn", "start"]
+COPY --from=build . .
