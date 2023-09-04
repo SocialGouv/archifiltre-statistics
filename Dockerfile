@@ -15,4 +15,4 @@ RUN yarn workspaces focus --production
 FROM node AS runner
 ENV NODE_ENV=production
 ENTRYPOINT ["yarn", "start"]
-COPY --from=build . .
+COPY --from=builder /app /app
