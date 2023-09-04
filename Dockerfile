@@ -1,6 +1,7 @@
 FROM node:15-alpine AS node
-USER 1000
 WORKDIR /app
+RUN chown 1000:1000 /app
+USER 1000
 
 FROM node AS builder
 
