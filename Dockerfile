@@ -1,19 +1,18 @@
 FROM node:15-alpine AS node
-WORKDIR /app
-RUN chown 1000:1000 /app
 USER 1000
+WORKDIR /app
 
 FROM node AS builder
 
 COPY yarn.lock .yarnrc.yml ./
-COPY .yarn .yarn
+COPY --chown=1000:1000 .yarn .yarn
 RUN yarn fetch --immutable && yarn cache clean
 
-COPY . .
+COPY --chown=1000:1000 . .
 RUN yarn build
 RUN yarn workspaces focus --production
 
 FROM node AS runner
 ENV NODE_ENV=production
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["node","dist/src/app.js"]
 COPY --from=builder /app /app
