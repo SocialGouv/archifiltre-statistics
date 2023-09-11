@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.21.0...v1.21.1) (2023-09-11)
+
+
+### Bug Fixes
+
+* up to yarn berry + fetch + docker opti ([#147](https://github.com/SocialGouv/archifiltre-statistics/issues/147)) ([5e8df72](https://github.com/SocialGouv/archifiltre-statistics/commit/5e8df72573db0d8bb9685f6c68a565b0a507fc8f))
+
 # [1.21.0](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.20.0...v1.21.0) (2023-07-26)
 
 
