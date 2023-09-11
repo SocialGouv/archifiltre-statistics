@@ -1,4 +1,5 @@
 FROM node:15-alpine AS node
+RUN chmod 777 /home/node && chmod 777 /tmp
 USER 1000
 WORKDIR /app
 
