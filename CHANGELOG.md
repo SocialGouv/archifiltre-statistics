@@ -1,3 +1,10 @@
+## [1.21.2](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.21.1...v1.21.2) (2023-09-11)
+
+
+### Bug Fixes
+
+* docker perms ([#148](https://github.com/SocialGouv/archifiltre-statistics/issues/148)) ([592a555](https://github.com/SocialGouv/archifiltre-statistics/commit/592a555f0e9e362e463b64407f41f3c01e1ae476))
+
 ## [1.21.1](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.21.0...v1.21.1) (2023-09-11)
 
 
