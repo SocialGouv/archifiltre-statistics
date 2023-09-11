@@ -11,3 +11,7 @@ app:
         name: archifiltre-statistics-sealed-secret
     - configMapRef:
         name: archifiltre-statistics-configmap
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000
+    runAsGroup: 1000
