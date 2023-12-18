@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.21.3...v1.22.0) (2023-12-18)
+
+
+### Features
+
+* ovh in prod ([#153](https://github.com/SocialGouv/archifiltre-statistics/issues/153)) ([dad0323](https://github.com/SocialGouv/archifiltre-statistics/commit/dad0323f38422b3f7bd7e08b78102742efb087bc))
+
 ## [1.21.3](https://github.com/SocialGouv/archifiltre-statistics/compare/v1.21.2...v1.21.3) (2023-12-05)
 
 
