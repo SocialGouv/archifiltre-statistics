@@ -2397,7 +2397,7 @@ __metadata:
     babel-jest: ^27.2.0
     cors: ^2.8.5
     date-fns: ^2.21.3
-    dotenv: ^8.2.0
+    dotenv: ^16.0.0
     eslint: ^7.24.0
     express: ^4.17.1
     husky: ^8.0.0
@@ -3370,10 +3370,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "dotenv@npm:8.2.0"
-  checksum: ad4c8e0df3e24b4811c8e93377d048a10a9b213dcd9f062483b4a2d3168f08f10ec9c618c23f5639060d230ccdb174c08761479e9baa29610aa978e1ee66df76
+"dotenv@npm:^16.0.0":
+  version: 16.3.1
+  resolution: "dotenv@npm:16.3.1"
+  checksum: 15d75e7279018f4bafd0ee9706593dd14455ddb71b3bcba9c52574460b7ccaf67d5cf8b2c08a5af1a9da6db36c956a04a1192b101ee102a3e0cf8817bbcf3dfd
   languageName: node
   linkType: hard
 
