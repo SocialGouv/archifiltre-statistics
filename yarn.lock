@@ -2396,7 +2396,7 @@ __metadata:
     axios: ^1.0.0
     babel-jest: ^27.2.0
     cors: ^2.8.5
-    date-fns: ^2.21.3
+    date-fns: ^3.0.0
     dotenv: ^8.2.0
     eslint: ^7.24.0
     express: ^4.17.1
@@ -3162,10 +3162,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:*, date-fns@npm:^2.21.3":
-  version: 2.22.1
-  resolution: "date-fns@npm:2.22.1"
-  checksum: 7ff97cd605af50c02f341687c2cafd218839a1aace67965374989855a13f76dc4fe52e0e38c343c1ad1f8399787cb6839a0b14a669c44b30550c287300b1bb50
+"date-fns@npm:*, date-fns@npm:^3.0.0":
+  version: 3.0.6
+  resolution: "date-fns@npm:3.0.6"
+  checksum: ee62b8e764e4c11c418d342f401d3e85adb4a631b196746e49ac89099c8d34cb141f10ae953c4a72bd3c76fe4d8740ec89564c8599a31256c82adbbed56c0014
   languageName: node
   linkType: hard
 
